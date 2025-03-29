@@ -1,0 +1,94 @@
+<div id="contact-us" class="contact-us section ">
+  <svg class="responsive-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#ffffff" fill-opacity="1" d="M0,96L8,101.3C16,107,32,117,48,122.7C64,128,80,128,96,133.3C112,139,128,149,144,154.7C160,160,176,160,192,176C208,192,224,224,240,229.3C256,235,272,213,288,197.3C304,181,320,171,336,181.3C352,192,368,224,384,224C400,224,416,192,432,181.3C448,171,464,181,480,160C496,139,512,85,528,53.3C544,21,560,11,576,16C592,21,608,43,624,42.7C640,43,656,21,672,64C688,107,704,213,720,234.7C736,256,752,192,768,154.7C784,117,800,107,816,96C832,85,848,75,864,106.7C880,139,896,213,912,256C928,299,944,309,960,304C976,299,992,277,1008,234.7C1024,192,1040,128,1056,117.3C1072,107,1088,149,1104,192C1120,235,1136,277,1152,277.3C1168,277,1184,235,1200,202.7C1216,171,1232,149,1248,122.7C1264,96,1280,64,1296,85.3C1312,107,1328,181,1344,218.7C1360,256,1376,256,1392,256C1408,256,1424,256,1432,256L1440,256L1440,0L1432,0C1424,0,1408,0,1392,0C1376,0,1360,0,1344,0C1328,0,1312,0,1296,0C1280,0,1264,0,1248,0C1232,0,1216,0,1200,0C1184,0,1168,0,1152,0C1136,0,1120,0,1104,0C1088,0,1072,0,1056,0C1040,0,1024,0,1008,0C992,0,976,0,960,0C944,0,928,0,912,0C896,0,880,0,864,0C848,0,832,0,816,0C800,0,784,0,768,0C752,0,736,0,720,0C704,0,688,0,672,0C656,0,640,0,624,0C608,0,592,0,576,0C560,0,544,0,528,0C512,0,496,0,480,0C464,0,448,0,432,0C416,0,400,0,384,0C368,0,352,0,336,0C320,0,304,0,288,0C272,0,256,0,240,0C224,0,208,0,192,0C176,0,160,0,144,0C128,0,112,0,96,0C80,0,64,0,48,0C32,0,16,0,8,0L0,0Z"></path>
+  </svg>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 align-self-center">
+        <div class="section-heading">
+          <h2 translate="landing.landingContactUS.contactUsTitle"></h2>
+          <p class="fs-2" translate="landing.landingContactUS.description">
+          </p>
+          <div class="phone-info">
+            <h4 translate="landing.landingContactUS.descriptionInner"></h4>
+              <div class="row justify-centen-center align-items-center ">
+                <div class="col-2">
+                  <i class="fa fa-phone text-main-landing"></i>
+                </div>
+                <div class="col-10"> <span translate="landing.landingContactUS.phoneText"></span></div>
+              </div>
+              <div class="row justify-centen-center align-items-center my-4 ">
+                <div class="col-2">
+                  <i class="fa fa-location-dot text-main-landing"></i>
+                </div>
+                <div class="col-10">
+                  <span translate="landing.landingContactUS.addressTest"></span>
+  
+                </div>
+              </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <form id="contact" (ngSubmit)="OnSubmit()" #formEntity="ngForm">
+          <div class="row">
+            <div class="col-lg-12">
+              <fieldset>
+                <input InputTirmFilter name="name" #name="ngModel" [(ngModel)]="form.name" type="text"
+                  class="form-control form-control-sm fs-4" id="name" register
+                  placeholder="{{'landing.landingContactUS.name'| translate}}" required>
+                <div *ngIf="name.invalid && name.touched" class="text-danger fs-5 text-center" translate>
+                  general.message.filedIdRequired</div>
+              </fieldset>
+            </div>
+
+            <div class="col-lg-12">
+              <fieldset>
+                <input InputTirmFilter name="phone" #phone="ngModel" [(ngModel)]="form.phone" type="text"
+                  class="form-control form-control-sm fs-4" id="phone" register
+                  placeholder="{{'landing.landingContactUS.phone'| translate}}" required>
+                <div *ngIf="phone.invalid && phone.touched" class="text-danger fs-5 text-center" translate>
+                  general.message.filedIdRequired</div>
+              </fieldset>
+            </div>
+            <div class="col-lg-12">
+              <fieldset>
+                <input InputTirmFilter name="email" pattern="[^ @]*@[^ @]*" #email="ngModel" [(ngModel)]="form.email"
+                  type="text" class="form-control form-control-sm fs-4" id="email" register
+                  placeholder="{{'landing.landingContactUS.email'| translate}}" required>
+                <div *ngIf="email.invalid && email.touched" class="text-danger fs-5 text-center" translate>
+                  general.message.filedIdRequired</div>
+              </fieldset>
+            </div>
+            <div class="col-lg-12">
+              <fieldset>
+                <textarea InputTirmFilter name="message" #message="ngModel" [(ngModel)]="form.message"
+                  class="form-control" id="message" placeholder="{{'landing.landingContactUS.message'| translate}}"
+                  required></textarea>
+                <div *ngIf="message.invalid && message.touched" class="text-danger fs-5 text-center" translate>
+                  general.message.filedIdRequired</div>
+              </fieldset>
+            </div>
+            <div class="col-lg-12">
+              <fieldset>
+                <button [disabled]="!formEntity.valid ||isLoad" type="submit" id="form-submit" class="main-button"
+                  translate="landing.landingContactUS.sendMessage">
+                  <span *ngIf="isLoad" class="spinner-grow spinner-grow-sm mx-2" role="status"
+                    aria-hidden="true"></span>
+                </button>
+                <span *ngIf="isSuccess" class="mx-5 text-success d-inline-block fs-4"
+                  translate="general.message.successProccess"></span>
+                <span *ngIf="isError" class="mx-5 text-danger  d-inline-block  fs-4"
+                  translate="general.message.failProccess"></span>
+              </fieldset>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <svg class="responsive-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" transform="rotate(180)">
+    <path fill="#ffffff" fill-opacity="1" d="M0,96L8,101.3C16,107,32,117,48,122.7C64,128,80,128,96,133.3C112,139,128,149,144,154.7C160,160,176,160,192,176C208,192,224,224,240,229.3C256,235,272,213,288,197.3C304,181,320,171,336,181.3C352,192,368,224,384,224C400,224,416,192,432,181.3C448,171,464,181,480,160C496,139,512,85,528,53.3C544,21,560,11,576,16C592,21,608,43,624,42.7C640,43,656,21,672,64C688,107,704,213,720,234.7C736,256,752,192,768,154.7C784,117,800,107,816,96C832,85,848,75,864,106.7C880,139,896,213,912,256C928,299,944,309,960,304C976,299,992,277,1008,234.7C1024,192,1040,128,1056,117.3C1072,107,1088,149,1104,192C1120,235,1136,277,1152,277.3C1168,277,1184,235,1200,202.7C1216,171,1232,149,1248,122.7C1264,96,1280,64,1296,85.3C1312,107,1328,181,1344,218.7C1360,256,1376,256,1392,256C1408,256,1424,256,1432,256L1440,256L1440,0L1432,0C1424,0,1408,0,1392,0C1376,0,1360,0,1344,0C1328,0,1312,0,1296,0C1280,0,1264,0,1248,0C1232,0,1216,0,1200,0C1184,0,1168,0,1152,0C1136,0,1120,0,1104,0C1088,0,1072,0,1056,0C1040,0,1024,0,1008,0C992,0,976,0,960,0C944,0,928,0,912,0C896,0,880,0,864,0C848,0,832,0,816,0C800,0,784,0,768,0C752,0,736,0,720,0C704,0,688,0,672,0C656,0,640,0,624,0C608,0,592,0,576,0C560,0,544,0,528,0C512,0,496,0,480,0C464,0,448,0,432,0C416,0,400,0,384,0C368,0,352,0,336,0C320,0,304,0,288,0C272,0,256,0,240,0C224,0,208,0,192,0C176,0,160,0,144,0C128,0,112,0,96,0C80,0,64,0,48,0C32,0,16,0,8,0L0,0Z"></path>
+</svg>
+</div>

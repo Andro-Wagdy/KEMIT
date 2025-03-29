@@ -1,0 +1,7 @@
+<div class="card-toolbar">
+<span class="fs-4" translate="general.table.show"></span>
+<select (change)="ListItemChange($event)" class="form-select mx-2 d-inline form-select-sm form-select-solid w-auto">
+  <option class="fs-4" *ngFor="let item of lengthTable">{{item}}</option>
+</select>
+<span class="fs-4" translate="general.table.records"></span>
+</div>

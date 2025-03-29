@@ -1,0 +1,27 @@
+<nav  class="navbar ">
+  <div class="navbar-container container-fluid ">
+    <input   type="checkbox" name="" id="" />
+    <div class="hamburger-lines" >
+      <span class="line line1"></span>
+      <span class="line line2"></span>
+      <span class="line line3"></span>
+    </div>
+    <ul class="menu-items flex">
+      <li class="ms-0 ms-md-4 "><a class="fs-2 mb-3 mb-md-0" href="#home" translate>landing.headerSeller.home</a></li>
+      <li class="ms-0 ms-md-4 "><a class="fs-2 mb-3 mb-md-0" href="seller#seller-about" translate>landing.headerSeller.aboutUs</a></li>
+      <li class="ms-0 ms-md-4 "><a class="fs-2 mb-3 mb-md-0" href="seller#sellerHow-work" translate>landing.headerSeller.howWork</a></li>
+      <li class="ms-0 ms-md-4 "><a class="fs-2 mb-3 mb-md-0" href="seller#knowledge" translate>landing.headerSeller.knowledge</a></li>
+      <li class="ms-0 ms-md-4 "><a class="fs-2 mb-3 mb-md-0" href="seller#contact-us" translate>landing.headerSeller.contactUs</a></li>
+      <li class="ms-0 ms-md-4 cursor-pointer ">
+<landing-switch-language></landing-switch-language>
+      </li>
+
+    </ul>
+    <a *ngIf="dashboardSetting?.isLogoImage" class="navbar-brand" href="#">
+      <img [src]="serverPath+dashboardSetting?.logoPath" width="40" height="40" alt="logo">
+    </a>
+    <h1 *ngIf="!dashboardSetting?.isLogoImage" class="text-main-landing fw-bold  me-0 me-md-5 fs-2 fs-md-5 mb-0 mt-2  mt-md-0" translate>landing.header.appName1
+        <span class="text-secondary-landing mb-0" translate> landing.header.appName2</span>
+    </h1>
+  </div>
+</nav>

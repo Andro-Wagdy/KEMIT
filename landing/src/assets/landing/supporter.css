@@ -1,0 +1,28 @@
+
+.container {
+  overflow: hidden;
+}
+.marquee {
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+}
+
+.images {
+  display: inline-block;
+}
+
+.images img {
+  height: 100px;
+  width: 250px;
+  margin-right: 10px; 
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}

@@ -1,0 +1,31 @@
+:host {
+  width: 100%;
+  @media (min-width: 992px) {
+    .login-form {
+      width: 100%;
+      max-width: 450px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}
+
+form{
+  input{
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  .form-control{
+    background-color: #dce8f1 !important;
+    border-color: #dce8f1 !important;
+    padding: 1.3rem;
+    border-radius: .5rem !important;
+  }
+  .form-control:focus{
+    background-color: #dce8f1!important;
+  border-color: #dce8f1!important;
+  box-shadow: 0 0 0 0.2rem #dce8f1;
+}
+}

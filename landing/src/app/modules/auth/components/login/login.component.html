@@ -1,0 +1,67 @@
+<!--begin::Form-->
+<ngx-ui-loader   fgsColor= "rgba(255,255,255,0)" [loaderId]="'loginLoaderId'"></ngx-ui-loader>
+
+<form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+  (ngSubmit)="submit()">
+
+  <div class="text-center mb-11">
+    <h1 class="text-dark fw-bolder mb-3 text-capitalize"  [innerHTML]="'management.login.appName' | translate">
+    </h1>
+  </div>
+
+  <div class="fv-row mb-8">
+    <label class="form-label fs-2 fw-bolder text-dark" translate="management.login.userName"></label>
+    <input class="form-control bg-transparent" type="email" name="userName" formControlName="userName" autocomplete="off"
+      [ngClass]="{
+        'is-invalid': (userName?.invalid&&userName?.dirty || userName?.hasError('required')&&userName?.dirty),
+        'is-valid': userName?.valid
+      }" />
+      <div *ngIf="userName?.invalid && userName?.touched" class="text-main-landing fs-4 text-bold text-center" translate>
+        general.message.filedIdRequired
+      </div>
+
+  </div>
+
+  <div class="fv-row mb-3">
+
+    <label class="form-label fw-bolder text-dark fs-2 mb-0"translate>management.login.password</label>
+
+    <input class="form-control bg-transparent" type="password" name="password" autocomplete="off"
+      formControlName="password" [ngClass]="{
+         'is-invalid': (password?.invalid&&password?.dirty || password?.hasError('required')&&password?.dirty),
+
+        'is-valid': password?.valid
+      }" />
+      <div *ngIf="password?.invalid && password?.touched" class="text-main-landing fs-4  text-bold text-center" translate>
+        general.message.filedIdRequired
+      </div>
+
+  </div>
+
+  <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+    <div></div>
+
+    <!--begin::Link-->
+    <!-- <a routerLink="/auth/forgot-password" class="link-primary">
+      Forgot Password ?
+    </a> -->
+    <!--end::Link-->
+  </div>
+  <div class=" row justify-content-between b-10">
+    <button  type="submit" id="kt_sign_in_submit" class="btn btn-primary w-auto d-inline-block"[disabled]="loginForm.invalid" translate>management.login.signIn
+     </button>
+   </div>
+
+  <!--end::Action-->
+</form>
+<!--end::Form-->
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <span role="alert">
+        {{ message }}
+      </span>
+    </div>
+  </ng-container>
+</ng-template>

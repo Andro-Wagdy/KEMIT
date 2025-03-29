@@ -1,0 +1,20 @@
+<form (ngSubmit)="deleteConfirmFn()" #formEntity="ngForm">
+  <ngx-ui-loader [hasProgressBar]="false"    [fgsType]="loaderOperationShap" [loaderId]="deleteLoader"></ngx-ui-loader>
+<div class="modal-header p-4   bg-dark">
+  <h4 class="modal-title text-white" id="modal-basic-title fs-4" ><span translate>general.action.delete  </span><span translate>{{titleOperation}} </span></h4>
+  <button type="button" class="bg-dark border-0" aria-label="Close" (click)="dismissFn()"> <i class="fas  text-white fa-times"></i></button>
+</div>
+<div class="modal-body">
+  <p class="text-center text-danger text-bold h2" translate>
+    general.action.deleteMessage
+   </p>
+</div>
+<div class="modal-footer p-0 m-0 d-flex justify-content-between">
+  <button    type="submit" class=" btn btn-success btn-md " aria-label="register">
+  <span class="font-weight-boldest" translate>general.action.save</span>
+</button>
+<button type="button" class="btn btn-md  btn-danger " aria-label="Close"  (click)="dismissFn()">
+  <span  class="font-weight-boldest" translate>general.action.close</span>
+</button>
+ </div>
+</form>

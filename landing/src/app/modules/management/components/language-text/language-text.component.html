@@ -1,0 +1,167 @@
+<app-toolbar [total]="pagination!.totalItems" class="app-toolbar" [appToolbarLayout]="'reports'" id="kt_app_toolbar">
+  <ng-container #content>
+
+   </ng-container>
+</app-toolbar>
+<div id="kt_app_content" class="app-content  flex-column-fluid ">
+<div id="kt_app_content_container" class="app-container  container-xxl ">
+  <base-search    [form]="form" (OnSearch)="OnSearch($event)"   (OnReset)="OnReset($event)"  [showReportType]="false" [showSettingReport]="false" [showReportType]="false">
+  <ng-container search>
+       <div class="    row    col-12 col-md-4">
+      <label class="col-12 col-md-4 fs-4  " translate> management.languageText.language
+      </label>
+      <div class="col-12 col-md-8">
+        <select #languageId="ngModel" [(ngModel)]="pagination.languageId" name="languageId"
+        class="form-select form-select-sm   fs-4" data-control="select2"
+        data-select2-id="select2-data-9-g766">
+        <ng-container *ngFor="let entity of languages">
+          <option class="fs-4" value="{{entity.id}}">{{ entity.displayName}}</option>
+          </ng-container>
+      </select>
+
+       </div>
+    </div>
+    <div class="    row    col-12 col-md-4">
+      <label class="col-12 col-md-4 fs-4  " translate> management.languageText.screensApp
+      </label>
+      <div class="col-12 col-md-8">
+        <div class="  bg-white ">
+          <ng-multiselect-dropdown
+          [placeholder]="'general.message.select'|translate"
+         [settings]="dropdownSettings"
+        [data]="screens"
+        [(ngModel)]="screensSelected"
+         name="screens"
+         class="fs-4"
+        required
+         >
+      </ng-multiselect-dropdown>
+
+       </div>
+     </div>
+    </div>
+    <div class="row  col-12 col-md-4">
+      <label class="col-12 col-md-4  fs-4 " translate> management.languageText.targetValue
+      </label>
+      <div class="col-12 col-md-8">
+        <textarea rows="1" InputTirmFilter name="targetValue" #targetValue="ngModel" [(ngModel)]="pagination.targetValue"
+        class="form-control form-control-sm fs-4" id="targetValue"  ></textarea>
+        </div>
+    </div>
+
+    </ng-container>
+
+
+</base-search>
+
+  <div class="card card-flush">
+  <div class="card-header align-items-center py-2 gap-2 gap-md-5">
+        <app-search-simple (searchChange)="searchChange($event)"></app-search-simple>
+          <table-length [lengthTable]="tableLengthSelect" (lengthChange)="ListItemChange($event)"
+       ></table-length>
+     </div>
+    <div class="card-body p-1">
+      <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderSearchShap" [loaderId]="searchLoader"></ngx-ui-loader>
+      <div class="table-responsive">
+        <p-table #tableMaster [value]="entities!" [rows]="pagination!.pageSize" dataKey="id" [lazy]="true"
+          (onLazyLoad)="tableChange($event)" (selectionChange)="onSelectionChange($event)"
+          [totalRecords]="pagination!.totalItems">
+          <ng-template pTemplate="header" let-columns>
+            <tr class=" ">
+
+              <th style="width:.5%" translate>#</th>
+
+              <th pSortableColumn="key" style="width:15%" translate="management.languageText.key">
+                <i class="fas fa-sort"></i>
+              </th>
+              <th pSortableColumn="targetValue" style="width:15%" translate="management.languageText.targetValue"> <i class="fas fa-sort"></i>
+                 </th>
+
+               <th pSortableColumn="createdDate" style="width:15%" translate="general.table.createdDate">
+                  <i class="fas fa-sort"></i>
+                    </th>
+                <th pSortableColumn="lastEditDate" style="width:15%" translate="general.table.lastEditDate">
+                  <i class="fas fa-sort"></i>
+                  </th>
+              <th style="width:15%" translate></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-index="rowIndex" let-columns="columns">
+            <tr class="fs-5">
+
+              <td>{{index+1}}</td>
+              <td>{{entity.languageKey}}</td>
+                  <td>{{entity.targetValue}}</td>
+
+              <td>{{entity.createdDate | date:"HH:mm yyyy-MM-dd"}}</td>
+              <td>{{entity.lastEditDate | date:"HH:mm yyyy-MM-dd" }}</td>
+
+              <td>
+               <span (click)=" EditModel(entity.id,operation) "
+                  class="btn btn-icon mx-1 btn-bg-light btn-active-color-primary btn-sm me-1">
+                  <i class="ki-duotone ki-pencil fs-2"><span class="path1"></span><span class="path2"></span></i>
+                </span>
+
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div *ngIf="pagination!.totalItems<=0" class="text-center text-danger text-bold fs-3 p-3" translate>
+        general.message.noData</div>
+      <div *ngIf="pagination!.totalItems>0" class="row px-2 py-4 overflow-hidden">
+        <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+          <ngb-pagination-info [pagination]="pagination"></ngb-pagination-info>
+        </div>
+        <div class="col-sm-12 col-md-7 fs-3 d-flex align-items-center justify-content-center justify-content-md-end">
+          <ngb-pagination (pageChange)="pageChanged($event)" [pageSize]="pagination!.pageSize"
+            [collectionSize]="pagination!.totalItems" [(page)]="pagination!.pageNumber" [maxSize]="5" [rotate]="false"
+            [boundaryLinks]="false"></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <ng-template #operation let-modal>
+    <form (ngSubmit)="OnSubmit()" #formEntity="ngForm">
+      <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderOperationShap"
+        [loaderId]="operationLoader"></ngx-ui-loader>
+      <div class="modal-header p-4  background-main-landing">
+        <h4 class="modal-title text-white" id="modal-basic-title fs-4">
+          <span *ngIf="!isEditForm" class="title-text" translate>general.action.register</span>
+        <span *ngIf="isEditForm" class="title-text" translate>general.action.edit</span>
+          <span class="mx-1" translate> {{titleOperation}} </span></h4>
+        <button type="button" class="background-main-landing border-0" aria-label="Close" (click)="modal.dismiss()"> <i
+            class="fas  text-white fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="row">
+          <div class="col-12">
+            <label for="targetValue" class="  fs-4 fw-bold form-label mb-2"
+              translate>management.languageText.targetValue</label>
+            <textarea rows="3" InputTirmFilter name="targetValue" pattern=".*[^ ].*" #targetValue="ngModel" [(ngModel)]="form.targetValue"
+              type="text" class="form-control  form-control-solid " id="icon" ></textarea>
+            <div *ngIf="targetValue.invalid && targetValue.touched" class="text-danger text-center" translate>
+              general.message.filedIdRequired</div>
+          </div>
+
+       </div>
+
+      </div>
+      <div class="modal-footer p-0 m-0 d-flex justify-content-between">
+        <button [ngClass]="{'btn-info': isEditForm,'btn-success':!isEditForm}" [disabled]="!formEntity.valid "
+          type="submit" class=" btn btn-md" aria-label="register">
+          <span translate>general.action.save</span>
+        </button>
+        <button type="button" class="btn btn-md btn-danger  " aria-label="Close" (click)="modal.dismiss()">
+          <span translate>general.action.close</span>
+        </button>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template #deleteModal let-modal>
+    <app-delete-modal (deleteConfirm)="DeleteConfirm()" (dismiss)="modal.dismiss()"></app-delete-modal>
+  </ng-template>

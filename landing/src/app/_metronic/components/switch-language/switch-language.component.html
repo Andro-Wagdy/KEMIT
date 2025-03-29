@@ -1,0 +1,10 @@
+
+
+<div ngbDropdown class="d-inline-block language ">
+  <i class="fas fa-globe fs-2x text-main-landing" id="dropdownBasic1" ngbDropdownToggle></i>
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="text-center">
+    <ng-container *ngFor="let lang of languages" >
+      <button class="fs-3 fw-bold  text-main-landing" (click)="switchMode(lang)"  ngbDropdownItem>{{lang.displayName}}</button>
+    </ng-container>
+  </div>
+</div>

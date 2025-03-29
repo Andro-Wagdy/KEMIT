@@ -1,0 +1,6 @@
+{
+  "/api": {
+  "target": "https://api.asphalt-eg.com",
+  "secure": false
+  }
+  }

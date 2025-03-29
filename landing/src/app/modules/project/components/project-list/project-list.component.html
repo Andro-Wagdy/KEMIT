@@ -1,0 +1,161 @@
+<app-toolbar  [total]="pagination!.totalItems" class="app-toolbar" [appToolbarLayout]="'reports'" id="kt_app_toolbar">
+  <ng-container #content>
+    <li class="nav-item"  *hasPermission="['permission.module.delete']">
+      <button *ngIf="(lengthSelect>=1)" (click)="openModalTitle(deleteModal)"
+        class="btn btn-sm fs-4 py-2   fw-bold btn-danger mx-3" translate> <i class="fa fa-trash mx-1"></i>
+        general.action.delete
+      </button>
+    </li>
+    <li class="nav-item" *hasPermission="['permission.module.register']" >
+      <a   [routerLink]="['/projects/entities-projects/register']"  class=" btn btn-sm fs-4 py-2  fw-bold btn-primary" translate>
+        <i class="fa fa-plus mx-1"></i> general.action.register
+      </a>
+    </li>
+   </ng-container>
+</app-toolbar>
+<div id="kt_app_content" class="app-content  flex-column-fluid ">
+<div id="kt_app_content_container" class="app-container-fluid  container-xxl ">
+  <ng-container *hasPermission="['permission.study.search']" >
+    <base-search *ngIf="isShow" class="search-wapper" [form]="form" (OnSearch)="OnSearch($event)"
+    (OnReset)="OnReset($event)" [showReportType]="false" [showSettingReport]="false" [showReportType]="false">
+    <ng-container search>
+      <div class="row   col-12 col-md-4 align-items-center mt-1">
+        <label class="col-12 col-md-4 col-form-label fs-3   " translate> project.projectEntities.dateFromTo</label>
+        <div class="col-8">
+          <input [bsConfig]="bsConfig" type="text" class="form-control  fs-3"
+            [(ngModel)]="searchForm.dateFromTo" bsDaterangepicker>
+        </div>
+      </div>
+
+      <div class="row  col-12 col-md-4 align-items-center">
+        <label class="col-12 col-md-4 col-form-label   fs-4" translate>project.projectEntities.serialNumber</label>
+        <div class="col-12 col-md-8">
+          <input InputTirmFilter name="serialNumber" #serialNumber="ngModel" [(ngModel)]="searchForm.serialNumber"
+            class="form-control  fs-3" id="serialNumber" type="search" />
+        </div>
+      </div>
+      <div class="row  col-12 col-md-4 align-items-center mt-1">
+        <label class="col-12 col-md-4 col-form-label  fs-4" translate> project.projectEntities.entityName</label>
+        <div class="col-12 col-md-8">
+          <ng-multiselect-dropdown [placeholder]="'general.message.select'|translate" [settings]="dropdownSettings"
+            [data]="clients" [(ngModel)]="searchForm.clientId" name="clientId" class="fs-3 " required>
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+
+
+
+
+    </ng-container>
+  </base-search>
+   </ng-container>
+  <div class="card card-flush">
+    <div class="card-header align-items-center py-2 gap-2 gap-md-5">
+
+      <div >
+        <button   (click)="isShow=!isShow" *ngIf="!isShow" type="button" class="btn btn-sm btn-primary  fs-3"
+          translate="general.action.show"> <i class="fas fa-search"></i></button>
+        <button   (click)="isShow=!isShow" *ngIf="isShow" type="button" class="btn btn-sm btn-primary fs-3"
+          translate="general.action.hidden"> <i class="fas fa-search"></i></button>
+
+      <app-search-simple (searchChange)="searchChange($event)" *hasPermission="['permission.study.search']" ></app-search-simple>
+      </div>
+
+    </div>
+    <div class="card-body p-1">
+      <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderSearchShap" [loaderId]="searchLoader"  ></ngx-ui-loader>
+      <div class="table-responsive">
+        <p-table #tableMaster [value]="entities!" [rows]="pagination!.pageSize" dataKey="id" [lazy]="true"
+          (onLazyLoad)="tableChange($event)" (selectionChange)="onSelectionChange($event)"
+          [totalRecords]="pagination!.totalItems">
+          <ng-template pTemplate="header" let-columns>
+            <tr class="">
+              <th style="width:.5%">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th style="width:.5%" translate>#</th>
+              <th pSortableColumn="name" style="width:15%" translate>
+                <i class="fas fa-sort"></i>
+                project.projectEntities.name
+              </th>
+              <th pSortableColumn="date" style="width:10%" translate>
+                <i class="fas fa-sort"></i>
+                project.projectEntities.date
+              </th>
+              <th pSortableColumn="entityName" style="width:10%" translate>
+                <i class="fas fa-sort"></i>
+                project.projectEntities.entityName
+              </th>
+
+                <th pSortableColumn="entityEntityParentName" style="width:10%" translate>
+                  <i class="fas fa-sort"></i>
+                  project.projectEntities.entityEntityParentName
+                </th>
+                <th pSortableColumn="serialNumber" style="width:10%" translate>
+                  <i class="fas fa-sort"></i>
+                  project.projectEntities.serialNumber
+                </th>
+                <th pSortableColumn="isFinished" style="width:5%" translate>
+                  <i class="fas fa-sort"></i>
+                  project.projectEntities.isFinished
+                </th>
+                <th pSortableColumn="createdDate" style="width:15%" translate>
+                  <i class="fas fa-sort"></i>
+                  general.table.createdDate
+                </th>
+                <th pSortableColumn="lastEditDate" style="width:15%" translate>
+                  <i class="fas fa-sort"></i>
+                  general.table.lastEditDate
+                </th>
+
+              <th style="width:15%" translate></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-index="rowIndex" let-columns="columns">
+            <tr class="fs-5">
+              <td>
+                <p-tableCheckbox [value]="entity"></p-tableCheckbox>
+              </td>
+              <td>{{index+1}}</td>
+              <td>{{entity.name}}</td>
+              <td>{{entity.date | date:"yyyy-MM-dd" }}</td>
+              <td>{{entity.entityName}}</td>
+              <td>{{entity.entityEntityParentName}}</td>
+              <td>{{entity.serialNumber}}</td>
+              <td>{{entity.isFinished}}</td>
+              <td>{{entity.createdDate | date:"HH:mm yyyy-MM-dd"}}</td>
+              <td>{{entity.lastEditDate | date:"HH:mm yyyy-MM-dd" }}</td>
+              <td>
+                <a  [routerLink]="['/projects/entities-projects/edit/'+entity.id]"   *hasPermission="['permission.module.edit']"
+                  class="btn btn-icon mx-1 btn-bg-light btn-active-color-primary btn-sm me-1">
+                  <i class="ki-duotone ki-pencil fs-2"><span class="path1"></span><span class="path2"></span></i>
+                </a>
+                <span (click)="openModal(entity.id,deleteModal) "  *hasPermission="['permission.module.delete']"
+                  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                  <i class="ki-duotone ki-trash fs-2"><span class="path1"></span><span class="path2"></span><span
+                      class="path3"></span><span class="path4"></span><span class="path5"></span></i> </span>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div *ngIf="pagination!.totalItems<=0" class="text-center text-danger text-bold fs-3 p-3" translate>
+        general.message.noData</div>
+      <div *ngIf="pagination!.totalItems>0" class="row px-2 py-4 overflow-hidden">
+        <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+          <ngb-pagination-info [pagination]="pagination"></ngb-pagination-info>
+        </div>
+        <div class="col-sm-12 col-md-7 fs-3 d-flex align-items-center justify-content-center justify-content-md-end">
+          <ngb-pagination (pageChange)="pageChanged($event)" [pageSize]="pagination!.pageSize"
+            [collectionSize]="pagination!.totalItems" [(page)]="pagination!.pageNumber" [maxSize]="10" [rotate]="true"
+            [boundaryLinks]="true"></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <ng-template #deleteModal let-modal>
+    <app-delete-modal (deleteConfirm)="DeleteConfirm()" (dismiss)="modal.dismiss()"></app-delete-modal>
+  </ng-template>

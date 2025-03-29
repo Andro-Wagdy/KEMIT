@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en"  >
+
+<head>
+  <meta charset="utf-8" />
+  <title> </title>
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" id="favicon"  >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700">
+  <!-- SPLASH SCREEN-->
+  <link rel="stylesheet" id="layout-styles-anchor" href="./assets/splash-screen.css" />
+  <!-- <link rel="stylesheet"  href="./assets/css/datatable.rtl.css" /> -->
+  <!-- <link rel="stylesheet"  href="./assets/css/plugin.rtl.css" /> -->
+  <!-- <link rel="stylesheet"  href="./assets/css/style.rtl.css" /> -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!-- <link rel="stylesheet"  href="./assets/sassrtl/site-rtl.css" /> -->
+<style>
+  body .multiselect-dropdown{
+border: 1px solid #E1E3EA !important;
+}
+
+</style>
+</head>
+
+<body root id="kt_body" class="mat-typography"  data-kt-app-toolbar-fixed="true">
+  <!-- <body root id="kt_body" class="mat-typography" direction="rtl" dir="rtl" style="direction: rtl"></body> -->
+  <!--begin::Theme mode setup on page load-->
+  <script>
+    if (document.documentElement) {
+      var defaultThemeMode = "system";
+
+      var hasKTName = document.body.hasAttribute("data-kt-name");
+      var lsKey = "kt_" + (hasKTName ? name + "_" : "") + "theme_mode_value"
+      var themeMode = localStorage.getItem(lsKey);
+      if (!themeMode) {
+        if (defaultThemeMode === "system") {
+          themeMode =
+            window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        } else {
+          themeMode = defaultThemeMode;
+        }
+      }
+
+      document.documentElement.setAttribute("data-bs-theme", themeMode);
+    }
+  </script>
+  <!--end::Theme mode setup on page load-->
+  <div id="splash-screen" class="splash-screen mb-0">
+    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" overflow="visible" fill="#000" stroke="#000 "><defs><rect id="loader" x="46.5" y="40" width="7" height="20" rx="2" ry="2" transform="translate(0 -30)" /></defs><use xlink:href="#loader" transform="rotate(120 50 50)"><animate attributeName="opacity" values="0;1;0" dur="1s" begin="0.33s" repeatCount="indefinite"></animate></use><use xlink:href="#loader" transform="rotate(240 50 50)"><animate attributeName="opacity" values="0;1;0" dur="1s" begin="0.67s" repeatCount="indefinite"></animate></use><use xlink:href="#loader" transform="rotate(360 50 50)"><animate attributeName="opacity" values="0;1;0" dur="1s" begin="1.00s" repeatCount="indefinite"></animate></use></svg>
+    <!-- <span class="fs-4"> Lingua Prime</span> -->
+  </div>
+</body>
+
+</html>

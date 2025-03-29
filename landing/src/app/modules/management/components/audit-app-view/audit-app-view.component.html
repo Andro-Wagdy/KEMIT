@@ -1,0 +1,145 @@
+<!-- begin::Header -->
+<div class="card-header border-0  ">
+  <h3 class="card-title align-items-start flex-column p-3 bg-dark text-white mb-3  ">
+    <span class="card-label fw-bolder fs-3 mb-1" translate="management.auditApp.title"></span>
+    <span class="text-muted mt-1 fw-bold fs-7"></span>
+  </h3>
+  <div class="card-toolbar">
+    <ul class="nav " >
+      <li class="nav-item">
+        <a
+          class="
+            nav-link
+            btn btn-sm btn-color-muted btn-active btn-active-light-primary
+            fw-bolder
+            px-4
+            me-1
+          "
+          data-bs-toggle="tab"
+          [ngClass]="activeClass('kt_table_widget_5_tab_1')"
+          (click)="setTab('kt_table_widget_5_tab_1')"
+         translate="management.auditApp.basicInfo">
+
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="
+            nav-link
+            btn btn-sm btn-color-muted btn-active btn-active-light-primary
+            fw-bolder
+            px-4
+            me-1
+          "
+          data-bs-toggle="tab"
+          [ngClass]="activeClass('kt_table_widget_5_tab_2')"
+          (click)="setTab('kt_table_widget_5_tab_2')"
+        translate="management.auditApp.changes" >
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</div>
+<!-- end::Header -->
+<!-- begin::Body -->
+<div class="card-body py-3">
+  <div class="tab-content">
+    <!-- begin::Tap pane -->
+    <div
+      class="tab-pane fade"
+      [ngClass]="activeClass('kt_table_widget_5_tab_1')"
+      id="kt_table_widget_5_tab_1"
+    >
+      <!-- begin::Table container -->
+      <div class="table-responsive">
+        <table class="table table-sm">
+          <thead   >
+            <tr >
+              <td colspan="2" translate>management.auditApp.userInfo</td>
+            </tr>
+          <tr>
+           <th  translate>management.auditApp.userName</th>
+          <th colspan="3">{{form.userName}}</th>
+           </tr>
+           <tr>
+            <th  translate>management.auditApp.name</th>
+           <th colspan="3">{{form.userFullName}}</th>
+            </tr>
+            <tr>
+              <th  translate>management.auditApp.clientIP</th>
+             <th colspan="3">{{form.clientIP}}</th>
+              </tr>
+              <tr >
+                <td colspan="2" translate>management.auditApp.processInfo</td>
+              </tr>
+              <tr>
+                <th translate> management.auditApp.tableName</th>
+               <th colspan="3" [innerHTML]="form.tableName"></th>
+                </tr>
+              <tr>
+                <th translate> management.auditApp.level</th>
+               <th colspan="3"  [innerHTML]="form.level"></th>
+                </tr>
+                <tr>
+                 <th  translate> management.auditApp.state</th>
+                <th colspan="3" [innerHTML]="form.state"></th>
+                 </tr>
+                 <tr>
+                   <th  translate> management.auditApp.timeStamp</th>
+                  <th colspan="3">{{form.timeStamp | date:" HH:mm:ss.sss dd-MM-yyyy"}}</th>
+                   </tr>
+                   <tr >
+                    <td colspan="2"translate>management.auditApp.messages</td>
+                  </tr>
+                  <tr>
+                    <th   translate>management.auditApp.message</th>
+                   <th colspan="3"> {{form.message}}</th>
+                    </tr>
+                    <tr>
+                      <th   translate>management.auditApp.exceptionMessage</th>
+                     <th colspan="3"> {{form.exceptionMessage}}</th>
+                      </tr>
+
+          </thead>
+
+          </table>
+      </div>
+      <!-- end::Table -->
+    </div>
+    <!-- end::Tap pane -->
+    <!-- begin::Tap pane -->
+    <div
+      class="tab-pane fade"
+      [ngClass]="activeClass('kt_table_widget_5_tab_2')"
+      id="kt_table_widget_5_tab_2"
+    >
+      <!-- begin::Table container -->
+      <div class="table-responsive">
+        <table class="table table-sm">
+          <thead  >
+            <tr>
+              <th translate>management.auditApp.nameField</th>
+             <th colspan="2" translate>management.auditApp.oldValue</th>
+             <th colspan="2" translate>management.auditApp.newValue</th>
+              </tr>
+            <ng-container *ngFor="let entity of changeEntity">
+
+            <tr class="py-2">
+           <th   >{{entity.name}}</th>
+          <th   colspan="2">{{entity.oldValue}}</th>
+          <th  [ngClass]="{'bg-primary': entity.isChange}" colspan="2">{{entity.newValue}}</th>
+           </tr>
+          </ng-container>
+
+          </thead>
+
+          </table>
+
+      </div>
+      <!-- end::Table -->
+    </div>
+
+  </div>
+</div>
+<!-- end::Body -->

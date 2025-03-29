@@ -1,0 +1,513 @@
+//
+// Theme style
+//
+
+// Initialize
+@import "init";
+// Components
+@import "./core/components/components";
+@import "components/components";
+// Layout
+@import "./core/layout/base/layout";
+@import "landing";
+@import "layout/layout";
+
+:root {
+  --bs-side-primary: #004b93 !important;
+  --bs-primary: #004b93 !important;
+  --bs-text-primary: #004b93 !important;
+  --bs-primary-active: #004b93 !important;
+  --scroll-main: #106C92;
+  --scroll-hover: #3E3F66;
+  --landing-main: #106C92;
+  --landing-secondary: #FF8E2B;
+
+}
+
+.text-main-landing{
+  color: var(--landing-main) !important;
+}
+.page-item.active .page-link{
+  background-color: var(--landing-main);
+border-color:  var(--landing-main);
+}
+.text-secondary-landing{
+  color: var(--landing-secondary) !important;
+}
+.splash-screen{
+  fill: var(--landing-main) !important;
+  stroke: var(--landing-main) !important;
+}
+.background-main-landing{
+
+  background-color: var(--landing-main);
+  color: #fff;
+  &:hover,&:active{
+  background-color: var(--landing-main) !important;
+  color: #fff  !important;
+  }
+}
+.background-secondary-landing{
+  background-color: var(--landing-secondary);
+  color: #fff;
+  &:hover,&:active{
+  background-color: var(--landing-secondary) !important;
+  color: #fff  !important;
+  }
+}
+
+.form-check-input:checked{
+  background-color:  var(--bs-primary) !important;;
+  border-color: var(--bs-primary) !important;
+
+}
+html[data-bs-theme="dark"] {
+  --bs-side-primary: #1e1e2d !important;
+  --bs-primary: #1e1e2d !important;
+  --bs-text-primary: #1e1e2d !important;
+  --bs-primary-active: #1e1e2d !important;
+
+}
+html[data-bs-theme="dark"] .p-datatable .p-datatable-thead>tr>th {
+  background-color: #000;
+  color: #fff;
+}
+
+html[data-bs-theme="dark"] .p-datatable .p-datatable-tbody>tr>td {
+  color: #fff;
+}
+.cursor-pointer{
+  cursor: pointer  !important;
+}
+
+#kt_app_content_container {
+  position: relative;
+}
+
+.bg-dark {
+  background-color: var(--bs-side-primary) !important;
+
+}
+
+#kt_app_sidebar_menu,
+#kt_app_sidebar_menu_wrapper,
+#kt_app_sidebar_footer,
+.app-sidebar-menu {
+  background-color: var(--bs-primary) !important;
+}
+
+#kt_app_sidebar_logo {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+[data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-logo {
+  border-bottom: 1px dashed var(--bs-primary) !important;
+}
+
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link.active {
+  background-color: #181c32 !important;
+
+}
+
+.bg-warning,
+.btn-warning {
+  background-color: #181c32 !important;
+
+}
+
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link .menu-title {
+  color: #fff;
+}
+
+.pagination {
+  --bs-pagination-hover-color: var(--bs-primary) !important;
+  --bs-pagination-focus-color: var(--bs-primary) !important;
+  --bs-pagination-active-bg: var(--bs-primary) !important;
+}
+
+.text-bg-primary {
+  background-color: var(--bs-primary) !important;
+  color: #fff !important;
+
+
+}
+
+.theme-blue .bs-datepicker-head,
+.theme-blue .bs-datepicker-body table td span.selected,
+.theme-blue .bs-datepicker-body table td.selected span,
+.theme-blue .bs-datepicker-body table td span[class*=select-]:after,
+.theme-blue .bs-datepicker-body table td[class*=select-] span:after {
+  background-color: var(--bs-primary) !important;
+
+}
+
+option:checked,
+option:hover {
+  color: #fff;
+  background-color: var(--bs-primary) !important;
+}
+
+.form-select option:checked,
+.form-select option:hover {
+  color: #fff;
+  background-color: var(--bs-primary) !important;
+}
+
+body:not(.fas) {
+  font-family: "Cairo" !important;
+  font-size: 1.2rem;
+}
+
+.page-item .page-link {
+  font-size: 1.2rem !important;
+}
+
+.p-datatable {
+  font-family: "Cairo" !important;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none !important;
+
+  tr,
+  th,
+  td,
+  .p-datatable-tbody>tr>td {
+    text-align: center !important;
+    padding: .3rem .2rem !important;
+    border: 0;
+    position: relative;
+  }
+
+  .p-datatable-thead>tr>th {
+
+    // align-items: center;
+    border: none;
+    padding: .5rem .2rem !important;
+
+  }
+
+  @media (max-width: 991.98px) {
+    .p-datatable {
+      font-size: .9rem;
+
+    }
+
+    tr,
+    th,
+    td,
+    .p-datatable-tbody>tr>td {
+      padding: .1rem .1rem !important;
+    }
+  }
+
+  .p-datatable-thead th:first-of-type {
+    border-radius: 0 5px 5px 0 !important;
+  }
+
+  .p-datatable-thead th:last-of-type {
+    border-radius: 5px 0 0 5px !important;
+  }
+
+  .p-checkbox .p-checkbox-box.p-highlight,
+  .p-checkbox .p-checkbox-box.p-highlight:hover {
+    border-color: var(--bs-primary);
+    background: var(--bs-primary);
+  }
+
+  .btn-w {
+    min-width: 15rem !important;
+  }
+
+  .p-datatable-tbody>tr {
+    background-color: transparent;
+  }
+
+}
+
+html[data-bs-theme=dark] {
+  --bs-primary: #151521;
+  --bs-pagination-active-bg: #151521;
+}
+
+.p-datatable .p-sortable-column.p-highlight,
+.p-datatable .p-sortable-column.p-highlight:hover,
+
+.p-datatable .p-sortable-column:not(.p-highlight):hover {
+  background-color: #f8f9fa;
+  color: #000;
+  border: none;
+}
+
+.p-datatable .p-sortable-column:focus {
+  box-shadow: none;
+}
+
+.p-datatable .p-sortable-column .p-column-title,
+.p-datatable .p-sortable-column .p-sortable-column-icon,
+.p-datatable .p-sortable-column .p-sortable-column-badge {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon,
+.p-datatable .p-sortable-column .p-sortable-column-icon,
+.p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+  color: #000;
+}
+
+.p-datatable .p-sortable-column:not(.p-highlight):hover .p-sortable-column-icon {
+  color: #000;
+
+
+}
+
+@media (max-width: 991.98px) {
+  body:not([data-kt-app-toolbar-fixed-mobile=true]) .app-toolbar {
+    background-color: var(--bs-app-toolbar-base-bg-color) !important;
+
+  }
+}
+
+.p-datatable .menu-item .menu-link {
+  padding: .2rem 1rem;
+}
+
+label {
+  display: flex;
+}
+
+.start-101 {
+  left: -50% !important;
+}
+
+.product-description .NgxEditor__Content {
+  min-height: 100px !important;
+}
+
+.p-multiselect {
+  width: 100% !important;
+}
+
+.p-sidebar-mask {
+  z-index: 0 !important;
+}
+
+.p-sidebar-left {
+  width: 30rem !important;
+
+}
+
+body .multiselect-dropdown .dropdown-btn {
+  border: 1px solid #E1E3EA !important;
+}
+
+body .multiselect-dropdown {
+  border-radius: 5px;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item-group,
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight,
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item,
+.p-multiselect-panel .p-multiselect-header {
+  padding: .3rem !important;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item .p-checkbox {
+  margin: 0 .5rem;
+}
+
+.p-multiselect.p-multiselect-chip .p-multiselect-token {
+  margin: .3rem;
+}
+
+.p-multiselect-label {
+  white-space: normal !important;
+}
+
+.p-multiselect-token-label {
+  font-size: 1.2rem !important;
+  margin-top: .3rem !important;
+}
+
+.product-operation .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item {
+  padding: 8px !important;
+  font-weight: bold !important;
+}
+
+.bgi-size-cover {
+  background-color: var(--landing-main);
+}
+
+.splash-screen img {
+  height: 150px !important;
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
+  border-color: var(--bs-primary);
+}
+
+
+
+@media (min-width: 992px) {
+  .app-root-store {
+
+    [data-kt-app-header-fixed=true][data-kt-app-sidebar-fixed=true][data-kt-app-sidebar-push-header=true] .app-header,
+    [data-kt-app-header-fixed=true][data-kt-app-sidebar-sticky=on][data-kt-app-sidebar-push-header=true] .app-header {
+      right: 0 !important;
+      left: 0 !important;
+    }
+  }
+}
+
+.top-store {
+  margin-top: 50px !important;
+}
+
+.store-policy {
+  margin: 0 auto;
+
+  h1 {
+    text-align: center !important;
+    font-weight: bold;
+  }
+}
+
+.menu-item .menu-link .menu-title {
+  font-size: 1.4rem !important;
+}
+
+.table-responsive {
+  overflow: inherit !important;
+}
+
+.accordion-button {
+  padding: 1rem !important;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.carousel-inner {
+  border-radius: 10px !important;
+}
+
+.card-product {
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 1% !important;
+    color: var(--bs-primary);
+    border-radius: 50%;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    position: absolute !important;
+    background-color: #fff !important;
+    padding: 1.5rem !important;
+    border-radius: 50%;
+  }
+
+  .carousel-control-next-icon {
+    background-image: url("../../assets/media/icons/duotune/arrows/arr001.svg");
+  }
+
+  .carousel-control-prev-icon {
+    background-image: url("../../assets/media/icons/duotune/arrows/arr002.svg");
+
+  }
+
+  .carousel-indicators {
+    display: none !important;
+  }
+}
+
+.toast-container .ngx-toastr .toast-message {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+@media (max-width: 991.98px) {
+
+  .main-auth,
+  .bgi-size-cover {
+    order: 2 !important;
+    height: 100vh !important;
+  }
+}
+
+.lang-login {
+  background-color: var(--bs-primary);
+  color: #fff;
+}
+//
+.toggle-report-header{
+  display: block  !important;
+}
+.report-write{
+.NgxEditor__Wrapper .NgxEditor{
+min-height: 5rem !important;
+}
+  .NgxEditor__Content p{
+    margin-bottom: 0 !important;
+
+  }
+}
+
+#kt_app_body .ngx-position-absolute.ngx-overlay{
+  z-index: 100 !important;
+}
+
+.p-dropdown{
+  width: 100%  !important;
+}
+
+.p-dropdown .p-dropdown-clear-icon {
+right: 1rem !important;
+}
+html[data-bs-theme="dark"]{
+ .NgxEditor__MenuBar{
+  background-color: #000;
+}
+.NgxEditor{
+  background-color: #1e1e2d;
+  color: #fff;
+}
+
+}
+
+.bs-datepicker-body th ,.bs-datepicker-body td,.bs-datepicker-body table.days span,.bs-datepicker-head button.current  {
+  font-size: 1.2rem !important;
+}
+
+.entities .multiselect-dropdown .dropdown-btn .selected-item{
+  max-width: 100%  !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--landing-main);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--landing-secondary)
+}
+
+.language .dropdown-toggle::after{
+  display: none !important;
+  content: none !important;
+}

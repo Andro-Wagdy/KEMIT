@@ -1,0 +1,31 @@
+<ng-container *ngIf="appFooterContainerCSSClass">
+  <!--begin::Footer container-->
+  <div class="app-container" [ngClass]="appFooterContainerCSSClass">
+    <ng-container *ngTemplateOutlet="footerView"></ng-container>
+  </div>
+  <!--end::Footer container-->
+</ng-container>
+
+<ng-container *ngIf="!appFooterContainerCSSClass">
+  <ng-container *ngTemplateOutlet="footerView"></ng-container>
+</ng-container>
+
+<ng-template #footerView>
+  <!--begin::Copyright-->
+  <div class="text-dark order-2 order-md-1">
+    <span   class="text-gray-800  fs-4 text-hover-primary" translate="general.footer.note"></span>
+
+  </div>
+  <!--end::Copyright-->
+
+  <!--begin::Menu-->
+  <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
+    <li class="menu-item">
+      <span class="menu-link px-2  fs-4" translate="general.footer.version"></span>
+    </li>
+
+
+  </ul>
+  <!--end::Menu-->
+
+</ng-template>

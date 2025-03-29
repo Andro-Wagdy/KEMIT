@@ -1,0 +1,454 @@
+<app-toolbar class="app-toolbar" [appToolbarLayout]="'reports'" id="kt_app_toolbar">
+  <ng-container #content>
+    <li class="nav-item"  >
+      <button  (click)="back()" class=" btn btn-sm fs-4 py-2  fw-bold btn-primary mx-2" translate>
+        <i class="fa fa-search mx-1"></i> general.action.search
+      </button>
+    </li>
+
+    <li class="nav-item"  *ngIf="isEditForm">
+      <button [disabled]="!form.valid" (click)="updateForm()"  class=" btn btn-sm fs-4 py-2  fw-bold btn-info mx-2" translate>
+        <i class="fa fa-edit mx-1"></i> general.action.edit
+      </button>
+    </li>
+    <li class="nav-item" *ngIf="!isEditForm">
+      <button [disabled]="!form.valid" (click)="submitForm()" class=" btn btn-sm fs-4 py-2  fw-bold btn-success mx-2" translate>
+        <i class="fa fa-plus mx-1"></i> general.action.save
+      </button>
+    </li>
+  </ng-container>
+</app-toolbar>
+<div id="kt_app_content" class="app-content  flex-column-fluid ">
+  <div id="kt_app_content_container" class="app-container  container-xxl ">
+    <div class="card card-flush">
+      <ngx-ui-loader [hasProgressBar]="false"    [fgsType]="loaderOperationShap" [loaderId]="operationLoader"></ngx-ui-loader>
+
+      <div class="card">
+           <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderOperationShap"
+            [loaderId]="operationLoader"></ngx-ui-loader>
+            <form [formGroup]="form">
+          <div class="card-toolbar p-3">
+            <ul class="nav ">
+              <li class="nav-item">
+                <a class="
+                    nav-link
+                    btn btn-sm btn-color-muted btn-active btn-active-light-primary
+                    fw-bolder
+                    fs-3
+                    px-4
+                    me-1
+                  " data-bs-toggle="tab" [ngClass]="activeClass('projectInfo')" (click)="setTab('projectInfo')"
+                  translate="project.projectEntities.projectInfo">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="
+                    nav-link
+                    btn btn-sm btn-color-muted btn-active btn-active-light-primary
+                    fw-bolder
+                    fs-3
+                    px-4
+                    me-1
+                  " data-bs-toggle="tab" [ngClass]="activeClass('paper')" (click)="setTab('paper')"
+                  translate="project.projectEntities.paper">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="
+                    nav-link
+                    btn btn-sm btn-color-muted btn-active btn-active-light-primary
+                    fw-bolder
+                    fs-3
+                    px-4
+                    me-1
+                  " data-bs-toggle="tab" [ngClass]="activeClass('fileds')" (click)="setTab('fileds')"
+                  translate="project.projectEntities.fileds">
+                </a>
+              </li>
+
+
+
+
+            </ul>
+          </div>
+
+          <div class="tab-content card-body ">
+            <div class="tab-pane fade" [ngClass]="activeClass('projectInfo')" id="userData">
+
+                <div class="row text-center p-5">
+                  <div class="  col-12 col-md-6">
+
+                    <div class="form-group row align-items-center    ">
+                      <label class="col-12 col-md-4   required   fw-bold fs-5 " translate>project.projectEntities.name</label>
+                      <div class="col-12 col-md-8">
+                        <textarea  (ngModelChange)="nameChanged($event)"  formControlName="name" name="name" InputTirmFilter spaceValidator rows="1"
+                          class="form-control   my-2   fs-5    " [ngClass]="{
+                                        'is-valid': name?.touched&& name?.valid,
+                                        'is-invalid': name?.touched&& name?.invalid
+                                      }"></textarea>
+                        <div *ngIf="name?.touched && name?.invalid">
+                          <div *ngIf="name?.hasError('required')" class="text-danger  fs-5 fs-5 " translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center  ">
+                      <label class="col-12 col-md-4  fw-bold fs-5 required " translate>project.projectEntities.nameFolder</label>
+                      <div class="col-12 col-md-8">
+                        <!-- [attr.disabled]="true"  -->
+                        <input    formControlName="nameFolder" name="nameFolder"
+                          class="form-control   my-2   fs-5   " [ngClass]="{
+                                        'is-valid': nameFolder?.touched&& nameFolder?.valid,
+                                        'is-invalid': nameFolder?.touched&& nameFolder?.invalid
+                                      }"   />
+                        <div *ngIf="nameFolder?.touched && nameFolder?.invalid">
+                          <div *ngIf="nameFolder?.hasError('required')" class="text-danger  fs-5  fs-5" translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                      <label class="col-12 col-md-4   required  fw-bold fs-5 " translate>project.projectEntities.date</label>
+                      <div class="col-12 col-md-8">
+                        <input type="text" class="form-control  my-2   fs-5  " bsDatepicker
+                          [bsConfig]="bsConfig" formControlName="date"
+                          name="date" [ngClass]="{
+                                            'is-valid': date?.touched&& date?.valid,
+                                            'is-invalid': date?.touched&& date?.invalid
+                                          }">
+                           <div *ngIf="date?.touched && date?.invalid">
+                          <div *ngIf="date?.hasError('required')" class="text-danger  fs-5"
+                            translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                        <label for="isFinished" class="col-12 col-md-4     fw-bold fs-5" translate>project.projectEntities.isFinished</label>
+                        <div class="col-12 col-md-8">
+                        <div class="form-check form-check-custom  d-inline">
+                          <input id="isFinished" formControlName="isFinished" name="isFinished"
+                          class="form-control " [ngClass]="{
+                            'is-valid': isFinished?.touched&& isFinished?.valid,
+                            'is-invalid': isFinished?.touched&& isFinished?.invalid
+                          }"  type="checkbox"
+                            class="form-check-input" type="checkbox">
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group row align-items-center">
+                      <label class="col-12 col-md-4  required  fw-bold fs-5 " translate>project.projectEntities.entityName</label>
+                      <div class="col-12 col-md-8  my-2  entities  fs-4">
+                        <div class="  bg-white  ">
+                          <ng-multiselect-dropdown
+                          [placeholder]="'general.message.select'|translate"
+                         [settings]="dropdownSettings"
+                         [data]="client"
+                         formControlName="entityId" name="entityId"
+                         >
+                      </ng-multiselect-dropdown>
+                       </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row align-items-center  ">
+                      <label class="col-sm-4 col-form-label  fw-bold fs-5 required " translate> project.projectEntities.processName
+                       </label>
+                        <div class="col-12 col-md-8">
+                         <select  [ngClass]="{ 'is-valid': processTypeId?.touched&& processTypeId?.valid,
+                         'is-invalid': processTypeId?.touched&& processTypeId?.invalid
+                       }"  formControlName="processTypeId" name="processTypeId"  class="form-select fs-5   my-2">
+                          <ng-container *ngFor="let processType   of processTypes">
+                            <option value="{{processType.id}}">{{processType.name}}</option>
+                         </ng-container>
+                       </select>
+
+                       <div class="text-center" *ngIf="processTypeId?.touched && processTypeId?.invalid">
+                         <div *ngIf="processTypeId?.hasError('required')" class="text-danger  fs-5" translate>
+                           general.message.filedIdRequired
+                         </div>
+                       </div>
+                       </div>
+                     </div>
+                  </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" [ngClass]="activeClass('paper')" id="paper">
+              <div class="row text-center p-5">
+                <div class=" form-group      row px-2">
+                  <div class="col-md-6 col-12">
+                    <div class="form-group row align-items-center  ">
+                      <label class="col-12 col-md-4   required  fw-bold fs-5  " translate>project.projectEntities.numberDocument</label>
+                      <div class="col-12 col-md-8">
+                        <input  type="number" formControlName="numberDocument" name="numberDocument" InputTirmFilter
+                          class="form-control    fw-bold fs-5 my-2" [ngClass]="{
+                                        'is-valid': numberDocument?.touched&& numberDocument?.valid,
+                                        'is-invalid': numberDocument?.touched&& numberDocument?.invalid
+                                      }"/>
+                        <div *ngIf="numberDocument?.touched && numberDocument?.invalid">
+                          <div *ngIf="numberDocument?.hasError('required')" class="text-danger  fs-5" translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center  ">
+                      <label class="col-12 col-md-4   fw-bold fs-5    " translate>project.projectEntities.recipientName</label>
+                      <div class="col-12 col-md-8">
+                        <textarea rows="1" formControlName="recipientName" name="recipientName" InputTirmFilter
+                          class="form-control  fw-bold fs-5 my-2 " [ngClass]="{
+                                        'is-valid': recipientName?.touched&& name?.valid,
+                                        'is-invalid': recipientName?.touched&& name?.invalid
+                                      }"></textarea>
+                        <div *ngIf="recipientName?.touched && recipientName?.invalid">
+                          <div *ngIf="recipientName?.hasError('required')" class="text-danger  fs-5" translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center  ">
+                      <label class="col-12 col-md-4    fw-bold fs-5   " translate>project.projectEntities.senderName</label>
+                      <div class="col-12 col-md-8">
+                        <textarea rows="1" formControlName="senderName" name="senderName" InputTirmFilter
+                          class="form-control  fw-bold fs-5 my-2" [ngClass]="{
+                                        'is-valid': senderName?.touched&& name?.valid,
+                                        'is-invalid': senderName?.touched&& name?.invalid
+                                      }"></textarea>
+                        <div *ngIf="senderName?.touched && senderName?.invalid">
+                          <div *ngIf="senderName?.hasError('required')" class="text-danger  fs-5" translate>filed
+                            required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center  ">
+                      <label class="col-12 col-md-4  fw-bold fs-5     " translate>project.projectEntities.deptName</label>
+                      <div class="col-12 col-md-8">
+                        <textarea rows="1" formControlName="deptName" name="deptName" InputTirmFilter
+                          class="form-control  fw-bold fs-5 my-2" [ngClass]="{
+                                        'is-valid': deptName?.touched&& deptName?.valid,
+                                        'is-invalid': deptName?.touched&& deptName?.invalid
+                                      }"></textarea>
+                        <div *ngIf="deptName?.touched && deptName?.invalid">
+                          <div *ngIf="deptName?.hasError('required')" class="text-danger  fs-5" translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center  ">
+                      <label class="col-12 col-md-4   fw-bold fs-5    " translate>project.projectEntities.managerName</label>
+                      <div class="col-12 col-md-8">
+                        <textarea rows="1" formControlName="managerName" name="managerName" InputTirmFilter
+                          class="form-control   fw-bold fs-5 my-2 " [ngClass]="{
+                                        'is-valid': managerName?.touched&& managerName?.valid,
+                                        'is-invalid': managerName?.touched&& managerName?.invalid
+                                      }"></textarea>
+                        <div *ngIf="managerName?.touched && managerName?.invalid">
+                          <div *ngIf="managerName?.hasError('required')" class="text-danger  fs-5" translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center  ">
+                      <label class="col-12 col-md-4  fw-bold fs-5     " translate>project.projectEntities.noteReport</label>
+                      <div class="col-12 col-md-8">
+                        <textarea rows="1" formControlName="noteReport" name="noteReport" InputTirmFilter
+                          class="form-control   fw-bold fs-5 my-2  " [ngClass]="{
+                                        'is-valid': noteReport?.touched&& noteReport?.valid,
+                                        'is-invalid': noteReport?.touched&& noteReport?.invalid
+                                      }"></textarea>
+                        <div *ngIf="noteReport?.touched && noteReport?.invalid">
+                          <div *ngIf="noteReport?.hasError('required')" class="text-danger  fs-5" translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                   <div class="col-12 col-md-6">
+                    <div class="form-group row align-items-center">
+                      <label class="col-12 col-md-4 fw-bold fs-5   required" translate>project.projectEntities.documentType</label>
+                      <div class="col-12 col-md-8 ">
+                        <select class="form-select fs-5   my-2  "
+                          formControlName="documentTypeId" name="documentTypeId" type="text"
+                          [ngClass]="{
+                                            'is-valid': documentTypeId?.touched&& documentTypeId?.valid,
+                                            'is-invalid': documentTypeId?.touched&& documentTypeId?.invalid
+                                          }">
+                          <ng-container *ngFor="let entity   of documentTypes">
+                            <option value="{{entity.id}}">{{entity.name}}</option>
+                         </ng-container>
+                        </select>
+                        <div *ngIf="documentTypeId?.touched && documentTypeId?.invalid">
+                          <div *ngIf="documentTypeId?.hasError('required')" class="text-danger  fs-5"
+                            translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                      <label class="col-12 col-md-4   fw-bold fs-5 " translate>project.projectEntities.recipientDegree</label>
+                      <div class="col-12 col-md-8 ">
+                        <select class="form-select fs-5   my-2 "
+                          formControlName="recipientDegreeId" name="recipientDegreeId" type="text"
+                          [ngClass]="{
+                                            'is-valid': recipientDegreeId?.touched&& recipientDegreeId?.valid,
+                                            'is-invalid': recipientDegreeId?.touched&& recipientDegreeId?.invalid
+                                          }">
+                          <ng-container *ngFor="let entity   of degrees">
+                            <option value="{{entity.id}}">{{entity.name}}</option>
+                         </ng-container>
+                        </select>
+                        <div *ngIf="recipientDegreeId?.touched && recipientDegreeId?.invalid">
+                          <div *ngIf="recipientDegreeId?.hasError('required')" class="text-danger  fs-5"
+                            translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                      <label class="col-12 col-md-4  fw-bold fs-5  " translate>project.projectEntities.senderDegree</label>
+                      <div class="col-12 col-md-8 ">
+                        <select class="form-select fs-5   my-2  "
+                          formControlName="senderDegreeId" name="senderDegreeId" type="text"
+                          [ngClass]="{
+                                            'is-valid': senderDegreeId?.touched&& senderDegreeId?.valid,
+                                            'is-invalid': senderDegreeId?.touched&& senderDegreeId?.invalid
+                                          }">
+                          <ng-container *ngFor="let entity   of degrees">
+                            <option value="{{entity.id}}">{{entity.name}}</option>
+                         </ng-container>
+                        </select>
+                        <div *ngIf="senderDegreeId?.touched && senderDegreeId?.invalid">
+                          <div *ngIf="senderDegreeId?.hasError('required')" class="text-danger  fs-5"
+                            translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                      <label class="col-12 col-md-4  fw-bold fs-5  " translate>project.projectEntities.deptDegree</label>
+                      <div class="col-12 col-md-8 ">
+                        <select class="form-select fs-5   my-2 "
+                          formControlName="deptDegreeId" name="deptDegreeId" type="text"
+                          [ngClass]="{
+                                            'is-valid': deptDegreeId?.touched&& deptDegreeId?.valid,
+                                            'is-invalid': deptDegreeId?.touched&& deptDegreeId?.invalid
+                                          }">
+                          <ng-container *ngFor="let entity   of degrees">
+                            <option value="{{entity.id}}">{{entity.name}}</option>
+                         </ng-container>
+                        </select>
+                        <div *ngIf="deptDegreeId?.touched && deptDegreeId?.invalid">
+                          <div *ngIf="deptDegreeId?.hasError('required')" class="text-danger  fs-5"
+                            translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center  ">
+                      <label class="col-12 col-md-4  fw-bold fs-5  " translate>project.projectEntities.managerDegree</label>
+                      <div class="col-12 col-md-8 ">
+                        <select class="form-select fs-5   my-2  "
+                          formControlName="managerDegreeId" name="managerDegreeId" type="text"
+                          [ngClass]="{
+                                            'is-valid': managerDegreeId?.touched&& managerDegreeId?.valid,
+                                            'is-invalid': managerDegreeId?.touched&& managerDegreeId?.invalid
+                                          }">
+                          <ng-container *ngFor="let entity   of degrees">
+                            <option value="{{entity.id}}">{{entity.name}}</option>
+                         </ng-container>
+                        </select>
+                        <div *ngIf="managerDegreeId?.touched && managerDegreeId?.invalid">
+                          <div *ngIf="managerDegreeId?.hasError('required')" class="text-danger  fs-5"
+                            translate>general.message.filedIdRequired</div>
+                        </div>
+                      </div>
+                    </div>
+                 </div>
+            </div>
+                  </div>
+
+              </div>
+              <div class="tab-pane fade" [ngClass]="activeClass('fileds')" id="fileds">
+
+                <div class=" form-group      row px-2">
+                  <button  (click)="addProjectFiled()"  type="button" class="btn btn-sm fs-4 py-2 w-25  fw-bold btn-success mx-2 " aria-label="add"  >
+                    <span  translate>project.projectEntities.addField</span>
+                    </button>
+
+                  <div class=" col-12">
+                <div formArrayName="projectsFileds">
+                  <div *ngFor="let meta of projectsFileds.controls; let i=index">
+
+                <div class="form-row row aligh-items-center my-2  "[formGroupName]="i" >
+                  <div class="col-md-2 col-12">
+                    <label for="filedLabel" class="form-label  required  w-100 fw-bold fs-5" translate>project.projectEntities.filedLabel</label>
+                   <textarea InputTirmFilter     formControlName="filedLabel"
+                    rows="1" class="form-control  my-2   fs-5  "     required ></textarea>
+                 </div>
+                <div class="col-md-2 col-12">
+                    <label for="filedName" class="form-label   w-100 fw-bold fs-5" translate>project.projectEntities.filedNameDB</label>
+                   <textarea  #model+{{i}} InputTirmFilter     formControlName="filedName"
+                     rows="1" class="form-control  my-2   fs-5  "     [disabled]="false" ></textarea>
+
+                </div>
+
+                <div class="col-12 col-md-2"  >
+                  <label class="form-label  required    w-100 fw-bold fs-5" translate>project.projectEntities.typeFiled</label>
+                  <select (ngModelChange)="changeFiledType( $event)"   formControlName="filedType"
+                    class="form-select fs-5" required="">
+                       <option value="text" translate>project.projectEntities.letters</option>
+                       <option value="number" translate>project.projectEntities.numbers</option>
+                       <option value="checkbox" translate>project.projectEntities.checkbox</option>
+                       <option value="checkboxMultiValue" translate>project.projectEntities.checkboxMultiValue</option>
+                       <option value="radio" translate>project.projectEntities.radio</option>
+                       <option value="select" translate>project.projectEntities.list</option>
+                       <option value="date" translate>project.projectEntities.date</option>
+                       <option value="dateTime" translate>project.projectEntities.dateTime</option>
+                       <option value="time" translate>project.projectEntities.time</option>
+                   </select>
+
+               </div>
+               <div class="col-md-3 col-12" *ngIf="typeFiled==='select' || typeFiled==='checkbox'" >
+                <label for="listItem" class="form-label       w-100 fw-bold fs-5" translate>project.projectEntities.listItem</label>
+                <textarea InputTirmFilter     formControlName="listItem"
+                   rows="1" class="form-control  my-2   fs-5"      ></textarea>
+
+              </div>
+               <div class="col-12 col-md-2 text-center">
+                <label  for="isRequired{{i}}"  class="form-label  text-center  w-100 fw-bold fs-5" translate>project.projectEntities.isRequired</label>
+                <div class="form-check form-check-custom  d-inline">
+                  <input id="isFinished"   formControlName="isRequired"  name="isRequired{{i}}" id="isRequired{{i}}"   type="checkbox"   class="form-check-input" type="checkbox">
+                </div>
+
+
+
+
+                 </div>
+                 <div class="col-md-1 col-12  ">
+                  <label for=" " class="form-label  text-center  w-100 fw-bold fs-5" translate>-</label>
+                   <button
+                  (click)="removeFiled(projectsFileds.controls[i].get('id')?.value,i,projectsFileds.controls[i].get('dayOfWork')?.value)"
+                  type="button" class="btn btn-sm  btn-danger btn-flat">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                  </div>
+
+
+             </div>
+             </div>
+             </div>
+             </div>
+             </div>
+
+
+                </div>
+              </div>
+
+
+
+
+
+        </form>
+
+       </div>
+
+
+
+      </div>
+      </div>
+    </div>

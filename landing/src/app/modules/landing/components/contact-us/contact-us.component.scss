@@ -1,0 +1,191 @@
+h2,
+h4 {
+  font-size: 2em;
+}
+
+.contact-us {
+  background: var(--landing-main);
+
+}
+
+.scoial {
+  margin-top: 5rem !important;
+}
+
+
+.contact-us .section-heading h2,
+.contact-us .section-heading h2 em,
+.contact-us .section-heading h2 span {
+  color: #fff;
+}
+
+.contact-us .section-heading p {
+  color: #fff;
+  margin-top: 30px;
+}
+
+.phone-info {
+  margin-top: 40px;
+}
+
+.phone-info {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.phone-info i {
+  width: 46px;
+  height: 46px;
+  display: inline-block;
+  text-align: center;
+  line-height: 46px;
+  background-color: #fff;
+  border-radius: 50%;
+  color: #ff3b2c;
+  font-size: 22px;
+  margin-left: 30px;
+  margin-right: 15px;
+}
+
+.phone-info span a {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+form#contact .contact-dec {
+  position: absolute;
+  right: -166px;
+  bottom: 0;
+}
+
+form#contact .contact-dec img {
+  max-width: 178px;
+}
+
+form#contact {
+  margin-left: 30px;
+  position: relative;
+  background-color: #fff;
+  padding: 60px 30px;
+  border-radius: 20px;
+}
+
+form#contact input {
+  width: 100%;
+  height: 46px;
+  border-radius: 33px;
+  background-color: var(--landing-main);
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+  ;
+  padding: 0px 20px;
+  margin-bottom: 20px;
+}
+
+form#contact input::placeholder {
+  color: #fff;
+}
+
+form#contact textarea {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  max-height: 180px;
+  min-height: 140px;
+  height: 140px;
+  border-radius: 20px;
+  background-color: var(--landing-main);
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+
+  padding: 15px 20px;
+  margin-bottom: 20px;
+}
+
+form#contact textarea::placeholder {
+  color: #fff;
+
+}
+
+form#contact button {
+  display: inline-block;
+  background-color: var(--landing-main);
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  text-transform: math-auto;
+  padding: 12px 25px;
+  border-radius: 23px;
+  letter-spacing: 0.25px;
+  border: none;
+  outline: none;
+  transition: all .3s;
+}
+
+form#contact button:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 1645px) {
+  form#contact .contact-dec {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+
+
+  .contact-us {
+    margin-top: 60px;
+    padding: 120px 0px;
+  }
+
+  .contact-us .section-heading {
+    text-align: center;
+  }
+
+  form#contact label {
+    color: var(--landing-secondary);
+  }
+
+  form#contact {
+    margin-left: 0px;
+    margin-top: 30px;
+  }
+
+  form#contact .contact-dec {
+    display: none;
+  }
+
+  .phone-info span {
+    display: block;
+    margin-top: 15px;
+    text-align: right;
+  }
+
+  .phone-info span i {
+    margin-left: 0px;
+  }
+
+  .phone-info .col-2 {
+    margin-top: 20px;
+  }
+
+  .scoial div {
+    width: 20%;
+  }
+
+  .wave {
+    display: none;
+  }
+
+}
+

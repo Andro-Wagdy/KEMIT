@@ -1,0 +1,43 @@
+<div style="padding-top: 150px;" class="main-header" id="main-header">
+  
+  <div class="container">
+    
+    <div class="row mt-5 align-items-center ">
+      <div class="col-12 col-lg-6">
+        <div class="right-image">
+          <img class="roundedImg rounded-3" [src]="serverPath+dashboardSetting?.landingMainPath" alt="main landing" />
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+        <div class="left-content header-text d-flex align-items-center gap-5 flex-column"
+          class="left-content header-text d-flex align-items-center gap-5 flex-column" data-wow-duration="1s"
+          data-wow-delay="1s">
+          <h2 class="text-main-landing text-center h2" translate>landing.home.beforeAppName<span
+              class="text-main-landing h2" translate>landing.home.appName </span></h2>
+          <p class="text-center" translate>landing.home.description </p>
+          <div>
+            <a *ngIf="dashboardSetting?.isOpenLandindTwo||dashboardSetting?.isOpenLandindOne" href="#joinToUs"
+              class="btn background-main-landing fs-2 fw-bold" translate>landing.home.link
+            </a>
+          </div>
+          
+        </div>
+      </div>
+    
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="false">
+  <div class="marquee ">
+    <div class="images">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100" width="250" alt="" />
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100" width="250" alt="" />
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/3.png" height="100" width="250" alt="" />
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100" width="250" alt="" />
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/5.png" height="100" width="250" alt="" />
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/6.png" height="100" width="250" alt="" />
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png" height="100" width="250" alt="" />
+
+    </div>
+  </div>
+</div>

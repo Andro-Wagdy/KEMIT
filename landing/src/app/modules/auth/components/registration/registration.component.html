@@ -1,0 +1,133 @@
+<form class="form w-100" novalidate="novalidate" id="kt_login_signup_form" [formGroup]="registrationForm"
+  (ngSubmit)="submit()">
+  <ngx-ui-loader   fgsColor= "rgba(255,255,255,0)" [loaderId]="'loginLoaderId'"></ngx-ui-loader>
+
+
+  <div class="text-center mb-11">
+    <h1 class="text-dark fw-bolder mb-3 text-capitalize"  [innerHTML]="'management.signUp.registerMarkter' | translate">
+    </h1>
+  </div>
+
+  <div class="fv-row mb-3">
+    <label class="form-label fw-bolder text-dark fs-4" translate>management.signUp.name</label>
+    <input class="form-control bg-transparent" type="text" name="name" formControlName="name"
+        autocomplete="off" [ngClass]="{
+        'is-invalid': registrationForm.controls['name'].invalid,
+        'is-valid': registrationForm.controls['name'].valid
+      }" />
+      <div *ngIf="registrationForm.controls['name']?.invalid && registrationForm.controls['name']?.touched" class="text-danger  fs-4 text-bold text-center" translate>
+        general.message.filedIdRequired
+      </div>
+
+
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-3">
+    <label class="form-label fw-bolder text-dark fs-4" translate>management.login.email</label>
+    <input class="form-control bg-transparent" type="email" placeholder="connect@gmail.com" name="email" formControlName="email"
+      autocomplete="off" [ngClass]="{
+        'is-invalid': registrationForm.controls['email'].invalid,
+        'is-valid': registrationForm.controls['email'].valid
+      }" />
+      <div *ngIf="registrationForm.controls['email']?.invalid && registrationForm.controls['email']?.touched" class="text-danger  fs-4 text-bold text-center" translate>
+        general.message.filedIdRequired
+      </div>
+
+    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+        validation: 'email',
+        message: 'الايميل غير صحيح',
+        control: registrationForm.controls['email']
+      }"></ng-container>
+    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+        validation: 'لا يقل عن 4 احرف',
+        message: 'Email should have at least 3 symbols',
+        control: registrationForm.controls['email']
+      }"></ng-container>
+
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-3">
+    <label class="form-label fw-bolder text-dark fs-4" translate>management.user.password</label>
+    <input class="form-control bg-transparent" type="password"  name="password"
+      formControlName="password" autocomplete="off" [ngClass]="{
+        'is-invalid': registrationForm.controls['password'].invalid,
+        'is-valid': registrationForm.controls['password'].valid
+      }" />
+      <div *ngIf="registrationForm.controls['password']?.invalid && registrationForm.controls['password']?.touched" class="text-danger  fs-4 text-bold text-center" translate>
+        general.message.filedIdRequired
+      </div>
+    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'لا تقل عن اربعه احرف',
+        control: registrationForm.controls['password']
+      }"></ng-container>
+
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-3">
+    <label class="form-label fw-bolder text-dark fs-4" translate>management.user.repassword</label>
+    <input class="form-control bg-transparent" type="password"   name="cPassword"
+      autocomplete="off" formControlName="cPassword" [ngClass]="{
+        'is-invalid': registrationForm.controls['cPassword'].invalid,
+        'is-valid': registrationForm.controls['cPassword'].valid
+      }" />
+      <div *ngIf="registrationForm.controls['cPassword']?.invalid && registrationForm.controls['cPassword']?.touched" class="text-danger  fs-4 text-bold text-center" translate>
+        general.message.filedIdRequired
+      </div>
+
+    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'لا تقل عن اربعه حروف',
+        control: registrationForm.controls['cPassword']
+      }"></ng-container>
+
+    <ng-container *ngIf="
+        registrationForm.controls['cPassword'].errors &&
+        registrationForm.controls['cPassword'].errors.ConfirmPassword
+      ">
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block" translate>
+          management.user.thePasswordAndRepasswordNotMatch
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <!--end::Form group-->
+
+
+
+  <!--begin::Form group-->
+  <div class="d-grid mb-10">
+    <button  type="submit" id="kt_sign_in_submit" class="btn btn-primary w-auto" [disabled]="registrationForm.invalid" translate>management.signUp.register
+    </button>
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Sign up-->
+  <div class="text-gray-500 text-center fw-semibold fs-4">
+    <span translate> management.signUp.alreadyHaveAnAccount</span>
+    <a routerLink="/auth/login" class="link-primary fw-semibold" translate>
+      management.login.signIn
+    </a>
+  </div>
+  <!--end::Sign up-->
+
+</form>
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

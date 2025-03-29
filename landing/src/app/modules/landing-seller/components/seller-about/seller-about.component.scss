@@ -1,0 +1,24 @@
+
+.services{
+    margin-top: 10em !important;
+}
+.header-text h2 {
+    font-size: 35px;
+    color: var(--landing-main);
+  }
+
+  .header-text i{
+    font-size: 25px;
+    color: var(--landing-main);
+  }
+
+p{
+    font-size: 25px !important;
+}
+
+
+@media (max-width: 992px)  {
+  .services {
+    padding: 0 6%;
+  }
+}

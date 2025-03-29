@@ -1,0 +1,137 @@
+h4 {
+    font-size: 1.7rem !important;
+}
+
+.icon {
+    align-items: start !important;
+}
+
+
+
+p {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 27px !important;
+}
+
+.main-services {
+    margin-bottom: 50px !important;
+}
+
+
+.about-us {
+    position: relative;
+    background-image: none;
+    padding: 0px;
+    direction: rtl !important;
+    background-color: var(--landing-main);
+}
+
+.about-us .left-image {
+    margin-right: 0px;
+    position: absolute;
+    bottom: -220px;
+    right: 0;
+}
+
+.about-us .services {
+    text-align: center;
+}
+
+.about-us .services .item {
+    padding: 30px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.about-us .services .item .right-text {
+    text-align: center !important;
+}
+
+.about-us i {
+    color: aqua;
+}
+
+.about-us .left-image {
+    margin-right: 45px;
+}
+
+.about-us .services .item {
+    margin-bottom: 30px;
+}
+
+.about-us .services .item .icon {
+    padding: 2rem ;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.about-us .services .item .icon  {
+    max-width: 70px;
+}
+
+.about-us .services .item h4 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.about-us .services .item p {
+    color: #fff;
+}
+
+.services i {
+    margin-left: 20px;
+    color: #03a4ed;
+}
+
+.ServicesP {
+    color: #fff;
+    font-size: 20px;
+}
+
+.ServicesH {
+    color: #fff;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 767px) {
+    .about-us .left-image {
+        bottom: -280px;
+    }
+    .about-us{
+        margin-top: 0 !important;
+    }
+
+    .wave {
+        display: none;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .item {
+        text-align: center;
+    }
+    .wave {
+        display: none;
+    }
+    .main-services {
+        background: linear-gradient(105deg, var(--landing-main) 0%, var(--landing-secondary) 100%);
+        padding: 10%;
+        width: 94%;
+        margin: 0 3% 0 0;
+        border-radius: 20px;
+    }
+
+    .about-us {
+        background: #fff;
+    }
+
+}

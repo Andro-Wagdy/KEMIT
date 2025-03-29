@@ -1,0 +1,55 @@
+<div class="row my-3">
+
+  <div class="col-12 col-md-4  ">
+    <div   class=" mb-xl-5 item item"  >
+      <div class="card h-lg-60 bg-warning">
+        <div class="card-body  p-1 d-flex justify-content-between align-items-start flex-column">
+          <div class="m-0">
+            <app-keenicon name="finance-calculator" class="fs-2hx position-absolute  text-white"></app-keenicon>
+            <span class="fs-3  text-white" translate="pill.paymentRequest.totalExpected"></span>
+
+          </div>
+          <div class="d-flex flex-column my-3">
+            <span class="fw-semibold fs-3x  text-white lh-1 ls-n2">{{total?.totalExpected??0}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-12 col-md-4  ">
+    <div   class=" mb-xl-5 item item"  >
+      <div class="card h-lg-60 bg-primary">
+        <div class="card-body  p-1 d-flex justify-content-between align-items-start flex-column">
+          <div class="m-0">
+            <app-keenicon name="lots-shopping" class="fs-2hx position-absolute  text-white"></app-keenicon>
+            <span class="fs-3  text-white" translate="pill.paymentRequest.totalMustTransform"></span>
+
+          </div>
+          <div class="d-flex flex-column my-3">
+            <span class="fw-semibold fs-3x  text-white lh-1 ls-n2">{{total?.totalMustTransform??0}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-12 col-md-4  ">
+    <div   class=" mb-xl-5 item item"  >
+      <div class="card h-lg-60 bg-danger  ">
+        <div class="card-body  p-1 d-flex justify-content-between align-items-start flex-column">
+          <div class="m-0">
+            <app-keenicon name="technology-2" class="fs-2hx position-absolute  text-white"></app-keenicon>
+            <span class="fs-3  text-white" translate="pill.paymentRequest.totalReturn"></span>
+
+          </div>
+          <div class="d-flex flex-column my-3">
+            <span class="fw-semibold fs-3x  text-white lh-1 ls-n2">{{total?.totalReturn??0}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>

@@ -1,0 +1,518 @@
+<app-toolbar class="app-toolbar" [appToolbarLayout]="'reports'" id="kt_app_toolbar">
+  <ng-container #content>
+    <li class="nav-item"  >
+      <button  (click)="back()" class=" btn btn-sm fs-4 py-2  fw-bold btn-light-primary mx-2" translate>
+        <i class="fa fa-search mx-1"></i> general.action.search
+      </button>
+    </li>
+       <ng-container  >
+    <li class="nav-item"  >
+      <button [disabled]="!form.valid" (click)="edit()"  class=" btn btn-sm fs-4 py-2  fw-bold btn-info mx-2" translate>
+        <i class="fa fa-edit mx-1"></i> general.action.edit
+      </button>
+    </li>
+  </ng-container>
+    <ng-container >
+
+  </ng-container>
+  </ng-container>
+</app-toolbar>
+<div id="kt_app_content" class="app-content  flex-column-fluid ">
+  <div id="kt_app_content_container" class="app-container-fluid  container-xxxl ">
+
+
+      <div class="card card-flush mt-0">
+        <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderOperationShap"
+        [loaderId]="operationLoader"></ngx-ui-loader>
+        <form [formGroup]="form">
+    <div class="card-toolbar p-3">
+      <ul class="nav ">
+        <li class="nav-item">
+          <a class="
+              nav-link
+              btn btn-sm btn-color-muted btn-active btn-active-light-primary
+              fw-bolder
+              fs-3
+              px-4
+              me-1
+            " data-bs-toggle="tab" [ngClass]="activeClass('basic_data')" (click)="setTab('basic_data')"
+            translate="setting.dashboardSetting.dashboard">
+          </a>
+        </li>
+        <li class="nav-item" >
+          <a class="
+              nav-link
+              btn btn-sm btn-color-muted btn-active btn-active-light-primary
+              fw-bolder
+              fs-3
+              px-4
+              me-3
+            " data-bs-toggle="tab" [ngClass]="activeClass('advanced')" (click)="setTab('advanced')"
+            translate="setting.dashboardSetting.landing">
+          </a>
+        </li>
+        <li class="nav-item" >
+          <a class="
+              nav-link
+              btn btn-sm btn-color-muted btn-active btn-active-light-primary
+              fw-bolder
+              fs-3
+              px-4
+              me-3
+            " data-bs-toggle="tab" [ngClass]="activeClass('seo')" (click)="setTab('seo')"
+            translate="محرك البحث">
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <div  class="tab-pane fade" [ngClass]="activeClass('basic_data')" id="basic_data">
+        <div class="row text-center p-5">
+          <div class="  col-12 col-md-5">
+            <div class="form-group row">
+              <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>setting.dashboardSetting.displayName</label>
+              <div class="col-12 col-sm-8">
+                <textarea rows="1" spaceValidator formControlName="displayName" name="displayName" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+                <div class="text-center" *ngIf="displayName?.touched && displayName?.invalid">
+                  <div *ngIf="displayName?.hasError('required')" class="text-danger fs-4" translate>
+                    general.message.filedIdRequired
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>setting.dashboardSetting.bsPrimary</label>
+              <div class="col-12 col-sm-8">
+                <input rows="1" spaceValidator formControlName="bsPrimary" name="bsPrimary" InputTirmFilter type="color"  class="form-control form-control-sm fs-4 fw-bolder" />
+                <div class="text-center" *ngIf="bsPrimary?.touched && bsPrimary?.invalid">
+                  <div *ngIf="bsPrimary?.hasError('required')" class="text-danger fs-4" translate>
+                    general.message.filedIdRequired
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>setting.dashboardSetting.bsSecondPrimary</label>
+              <div class="col-12 col-sm-8">
+                <input rows="1" spaceValidator formControlName="bsSecondPrimary" name="bsSecondPrimary" InputTirmFilter type="color"  class="form-control form-control-sm fs-4 fw-bolder" />
+                <div class="text-center" *ngIf="bsSecondPrimary?.touched && bsSecondPrimary?.invalid">
+                  <div *ngIf="bsSecondPrimary?.hasError('required')" class="text-danger fs-4" translate>
+                    general.message.filedIdRequired
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>setting.dashboardSetting.bsPrimaryInverse</label>
+              <div class="col-12 col-sm-8">
+                <input rows="1" spaceValidator formControlName="bsPrimaryInverse" name="bsPrimaryInverse" InputTirmFilter type="color"  class="form-control form-control-sm fs-4 fw-bolder" />
+                <div class="text-center" *ngIf="bsPrimaryInverse?.touched && bsPrimaryInverse?.invalid">
+                  <div *ngIf="bsPrimaryInverse?.hasError('required')" class="text-danger fs-4" translate>
+                    general.message.filedIdRequired
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-12 col-sm-4 col-form-label   fw-bold fs-4" translate>setting.dashboardSetting.phones</label>
+              <div class="col-12 col-sm-8">
+                <textarea rows="1" spaceValidator formControlName="phones" name="phones" InputTirmFilter type="text"
+                  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+                <div class="text-center" *ngIf="phones?.touched && phones?.invalid">
+                  <div *ngIf="phones?.hasError('required')" class="text-danger fs-4" translate>
+                    general.message.filedIdRequired
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate>setting.dashboardSetting.address</label>
+              <div class="col-12 col-sm-8">
+                <textarea rows="1" spaceValidator formControlName="address" name="address" InputTirmFilter type="text"
+                  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+                <div class="text-center" *ngIf="address?.touched && address?.invalid">
+                  <div *ngIf="address?.hasError('required')" class="text-danger fs-4" translate>
+                    general.message.filedIdRequired
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+          <div class="col-12 col-md-7">
+            <div class="m-0">
+              <input   (change)="saveChangeImage(logoFile.files)" #logoFile class="d-none" type="file"
+              id="logoPathFile" />
+              <div class="row justify-content-between align-items-center">
+                <div class="col-12 col-md-10">
+                  <label for="logoPathFile" class="fs-6 p-0 py-3 m-0 mb-1 fw-bold btn btn-primary w-100 "> <span translate="setting.dashboardSetting.logo"></span> <i
+                    class="fas fa-cloud-upload-alt"></i></label>
+                </div>
+
+                     <div class="col-6 col-md-1"   >
+                      <button (click)="viewLogo()"   *ngIf="logoPathFile.path || logoPathField?.value"    type="  button"
+                      class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary  mx-2 p-1">
+                      <app-keenicon name="eye" class="fs-2 text-primary mx-2 "></app-keenicon>
+                    </button>
+                    </div>
+
+                <div class="col-6 col-md-1"   >
+                  <button *ngIf="logoPathFile.path || logoPathField?.value"  (click)="removeLogoPathField()" type="  button"
+                  class="btn btn-sm btn-icon btn-light-danger mx-2">
+                  <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+                      class="path2"></span></i> </button>
+                </div>
+              </div>
+            </div>
+            <div class="m-0">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-12 col-md-10">
+                 <input   (change)="saveChangeSmallLogoImage(smallLogoFile.files)" #smallLogoFile class="d-none" type="file"
+                id="smallLogoPathFile" />
+                  <label for="smallLogoPathFile" class="fs-6 p-0 py-3 m-0 mb-1 fw-bold btn btn-primary w-100"> <span translate="setting.dashboardSetting.smallLogo"></span> <i
+                    class="fas fa-cloud-upload-alt"></i></label>
+                </div>
+                     <div class="col-6 col-md-1"   >
+                      <button (click)="viewSmalLogo()"   *ngIf="smallLogoPathFile.path || smallLogoPathField?.value"    type="  button"
+                      class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary  mx-2 p-1">
+                      <app-keenicon name="eye" class="fs-2 text-primary mx-2 "></app-keenicon>
+                    </button>
+                    </div>
+
+                <div class="col-12 col-md-1">
+                  <button *ngIf="smallLogoPathFile.path || smallLogoPathField?.value"  (click)="removeSmallLogoPathField()" type="  button"
+                  class="btn btn-sm btn-icon btn-light-danger mx-2">
+                  <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+                      class="path2"></span></i> </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+ </div>
+
+
+ </div>
+<div class="tab-content">
+  <div  class="tab-pane fade" [ngClass]="activeClass('advanced')" id="advanced">
+
+    <div class="row p-5">
+      <div class="col-12 col-md-6">
+        <div class="form-group row">
+          <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate>setting.dashboardSetting.domainName</label>
+          <div class="col-12 col-sm-8">
+            <textarea rows="1" spaceValidator formControlName="domainName" name="domainName" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+            <div class="text-center" *ngIf="domainName?.touched && domainName?.invalid">
+              <div *ngIf="domainName?.hasError('required')" class="text-danger fs-4" translate>
+                general.message.filedIdRequired
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate>setting.dashboardSetting.email</label>
+          <div class="col-12 col-sm-8">
+            <textarea rows="1" spaceValidator formControlName="email" name="email" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+            <div class="text-center" *ngIf="email?.touched && email?.invalid">
+              <div *ngIf="email?.hasError('required')" class="text-danger fs-4" translate>
+                general.message.filedIdRequired
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate>setting.dashboardSetting.facebookUrl</label>
+          <div class="col-12 col-sm-8">
+            <textarea rows="1" spaceValidator formControlName="facebookUrl" name="facebookUrl" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+            <div class="text-center" *ngIf="facebookUrl?.touched && facebookUrl?.invalid">
+              <div *ngIf="facebookUrl?.hasError('required')" class="text-danger fs-4" translate>
+                general.message.filedIdRequired
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate>setting.dashboardSetting.youtubeUrl</label>
+          <div class="col-12 col-sm-8">
+            <textarea rows="1" spaceValidator formControlName="youtubeUrl" name="youtubeUrl" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+            <div class="text-center" *ngIf="youtubeUrl?.touched && youtubeUrl?.invalid">
+              <div *ngIf="youtubeUrl?.hasError('required')" class="text-danger fs-4" translate>
+                general.message.filedIdRequired
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate>setting.dashboardSetting.instgramUrl</label>
+          <div class="col-12 col-sm-8">
+            <textarea rows="1" spaceValidator formControlName="instgramUrl" name="instgramUrl" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+            <div class="text-center" *ngIf="instgramUrl?.touched && instgramUrl?.invalid">
+              <div *ngIf="instgramUrl?.hasError('required')" class="text-danger fs-4" translate>
+                general.message.filedIdRequired
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate>setting.dashboardSetting.linkedinUrl</label>
+          <div class="col-12 col-sm-8">
+            <textarea rows="1" spaceValidator formControlName="linkedinUrl" name="linkedinUrl" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+            <div class="text-center" *ngIf="linkedinUrl?.touched && linkedinUrl?.invalid">
+              <div *ngIf="linkedinUrl?.hasError('required')" class="text-danger fs-4" translate>
+                general.message.filedIdRequired
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate>setting.dashboardSetting.whatsUrl</label>
+          <div class="col-12 col-sm-8">
+            <textarea rows="1" spaceValidator formControlName="whatsUrl" name="whatsUrl" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+            <div class="text-center" *ngIf="whatsUrl?.touched && whatsUrl?.invalid">
+              <div *ngIf="whatsUrl?.hasError('required')" class="text-danger fs-4" translate>
+                general.message.filedIdRequired
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    <div class="form-group row">
+      <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>setting.dashboardSetting.landingPrimary</label>
+      <div class="col-12 col-sm-8">
+        <input rows="1" spaceValidator formControlName="landingPrimary" name="landingPrimary" InputTirmFilter type="color"  class="form-control form-control-sm fs-4 fw-bolder" />
+        <div class="text-center" *ngIf="landingPrimary?.touched && landingPrimary?.invalid">
+          <div *ngIf="landingPrimary?.hasError('required')" class="text-danger fs-4" translate>
+            general.message.filedIdRequired
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>setting.dashboardSetting.landingSecondPrimary</label>
+      <div class="col-12 col-sm-8">
+        <input rows="1" spaceValidator formControlName="landingSecondPrimary" name="landingSecondPrimary" InputTirmFilter type="color"  class="form-control form-control-sm fs-4 fw-bolder" />
+        <div class="text-center" *ngIf="landingSecondPrimary?.touched && landingSecondPrimary?.invalid">
+          <div *ngIf="landingSecondPrimary?.hasError('required')" class="text-danger fs-4" translate>
+            general.message.filedIdRequired
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate="هل تفعيل لايندج 1"></label>
+      <div class="col-12 col-sm-8">
+        <div class="form-check form-check-custom form-check-solid">
+          <input name="isOpenLandindOne"  formControlName="isOpenLandindOne" name="isOpenLandindOne"   id="isOpenLandindOne" type="checkbox"
+            class="form-check-input" type="checkbox">
+        </div>
+        <div class="text-center" *ngIf="isOpenLandindOne?.touched && isOpenLandindOne?.invalid">
+          <div *ngIf="isOpenLandindOne?.hasError('required')" class="text-danger fs-4" translate>
+            general.message.filedIdRequired
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate="هل تفعيل لايندج 2"></label>
+      <div class="col-12 col-sm-8">
+        <div class="form-check form-check-custom form-check-solid">
+          <input name="isOpenLandindTwo"  formControlName="isOpenLandindTwo" name="isOpenLandindTwo"   id="isOpenLandindTwo" type="checkbox"
+            class="form-check-input" type="checkbox">
+        </div>
+        <div class="text-center" *ngIf="isOpenLandindTwo?.touched && isOpenLandindTwo?.invalid">
+          <div *ngIf="isOpenLandindTwo?.hasError('required')" class="text-danger fs-4" translate>
+            general.message.filedIdRequired
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-12 col-sm-4 col-form-label    fw-bold fs-4" translate="هل اللوجو صورة "></label>
+      <div class="col-12 col-sm-8">
+        <div class="form-check form-check-custom form-check-solid">
+          <input name="isLogoImage"  formControlName="isLogoImage" name="isLogoImage"   id="isLogoImage" type="checkbox"
+            class="form-check-input" type="checkbox">
+        </div>
+        <div class="text-center" *ngIf="isLogoImage?.touched && isLogoImage?.invalid">
+          <div *ngIf="isLogoImage?.hasError('required')" class="text-danger fs-4" translate>
+            general.message.filedIdRequired
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="m-0">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-12 col-md-10">
+         <input   (change)="saveChangelandingMainImage(landingMainFile.files)" #landingMainFile class="d-none" type="file"
+        id="landingMainPathFile" />
+          <label for="landingMainPathFile" class="fs-6 p-0 py-3 m-0 mb-1 fw-bold btn btn-primary w-100"> <span translate="لايندج الاساسى"></span> <i
+            class="fas fa-cloud-upload-alt"></i></label>
+        </div>
+             <div class="col-6 col-md-1"   >
+              {{landingMainPathFile?.value}}
+              <button (click)="viewlandingMainPath()"   *ngIf="landingMainPathFile.path || landingMainPathField?.value"    type="  button"
+              class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary  mx-2 p-1">
+              <app-keenicon name="eye" class="fs-2 text-primary mx-2 "></app-keenicon>
+            </button>
+            </div>
+        <div class="col-12 col-md-1">
+          <button *ngIf="landingMainPathFile.path || landingMainPathField?.value"  (click)="removelandingMainField()" type="  button"
+          class="btn btn-sm btn-icon btn-light-danger mx-2">
+          <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+              class="path2"></span></i> </button>
+        </div>
+      </div>
+    </div>
+    <div class="m-0">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-12 col-md-10">
+         <input   (change)="saveChangelandingAboutImage(landingAboutFile.files)" #landingAboutFile class="d-none" type="file"
+        id="landingAboutPathFile" />
+          <label for="landingAboutPathFile" class="fs-6 p-0 py-3 m-0 mb-1 fw-bold btn btn-primary w-100"> <span translate="لايندج  اساسى نبذه عنا"></span> <i
+            class="fas fa-cloud-upload-alt"></i></label>
+        </div>
+             <div class="col-6 col-md-1"   >
+              <button (click)="viewLandingAboutPath()"   *ngIf="landingAboutPathFile.path || landingAboutPathField?.value"    type="  button"
+              class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary  mx-2 p-1">
+              <app-keenicon name="eye" class="fs-2 text-primary mx-2 "></app-keenicon>
+            </button>
+            </div>
+        <div class="col-12 col-md-1">
+          <button *ngIf="landingAboutPathFile.path || landingAboutPathField?.value"  (click)="removeLandingAboutField()" type="  button"
+          class="btn btn-sm btn-icon btn-light-danger mx-2">
+          <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+              class="path2"></span></i> </button>
+        </div>
+      </div>
+    </div>
+    <div class="m-0">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-12 col-md-10">
+         <input   (change)="saveChangelandingJoinUsImage(landingJoinUs.files)" #landingJoinUs class="d-none" type="file"
+        id="landingJoinUs" />
+          <label for="landingJoinUs" class="fs-6 p-0 py-3 m-0 mb-1 fw-bold btn btn-primary w-100"> <span translate="لايندج  اساسى  انضم الينا"></span> <i
+            class="fas fa-cloud-upload-alt"></i></label>
+        </div>
+             <div class="col-6 col-md-1">
+              <button (click)="viewLandingJoinUsPath()"   *ngIf="landingJoinUsPathFile.path || landingJoinUsPathField?.value"    type="  button"
+              class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary  mx-2 p-1">
+              <app-keenicon name="eye" class="fs-2 text-primary mx-2 "></app-keenicon>
+            </button>
+            </div>
+        <div class="col-6  col-md-1">
+          <button *ngIf="landingJoinUsPathFile.path || landingJoinUsPathField?.value"  (click)="removelandingJoinUsField()" type="  button"
+          class="btn btn-sm btn-icon btn-light-danger mx-2">
+          <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+              class="path2"></span></i> </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+<div  class="tab-pane fade" [ngClass]="activeClass('seo')" id="seo">
+  <div class="row text-center p-5">
+    <div class="col-12">
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>pageTitle</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="pageTitle" name="pageTitle" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>pageDescription</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="pageDescription" name="pageDescription" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>robots</label>
+        <div class="col-12 col-sm-8 align-items-center mb-1">
+          <textarea rows="1" spaceValidator formControlName="robots" name="robots" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>canonical</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="canonical" name="canonical" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>ogLocale</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="ogLocale" name="ogLocale" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>ogSiteName</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="ogSiteName" name="ogSiteName" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>ogType</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="ogType" name="ogType" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>ogTitle</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="ogTitle" name="ogTitle" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>ogDescription</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="ogDescription" name="ogDescription" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>ogUrl</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="ogUrl" name="ogUrl" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>twitterCard</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="twitterCard" name="twitterCard" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>twitterTitle</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="twitterTitle" name="twitterTitle" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mb-1">
+        <label class="col-12 col-sm-4 col-form-label  required fw-bold fs-4" translate>twitterDescription</label>
+        <div class="col-12 col-sm-8">
+          <textarea rows="1" spaceValidator formControlName="twitterDescription" name="twitterDescription" InputTirmFilter type="text"  class="form-control form-control-sm fs-4 fw-bolder"></textarea>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+
+  </div>
+</div>
+
+
+      </form>
+
+      </div>
+    </div>

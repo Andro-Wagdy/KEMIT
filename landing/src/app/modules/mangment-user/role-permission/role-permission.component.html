@@ -1,0 +1,73 @@
+<app-toolbar class="app-toolbar" [appToolbarLayout]="'reports'" id="kt_app_toolbar">
+  <ng-container #content>
+    <li class="nav-item"  >
+      <button  (click)="back()" class=" btn btn-sm fs-4 py-2  fw-bold btn-light-primary mx-2" translate>
+        <i class="fa fa-search mx-1"></i> general.action.search
+      </button>
+    </li>
+    <li class="nav-item">
+      <button  (click)="updatetPermission()" class=" btn btn-sm fs-4 py-2  fw-bold btn-primary" translate>
+        <i class="fa fa-plus mx-1"></i> general.action.save
+      </button>
+    </li>
+   </ng-container>
+</app-toolbar>
+<div id="kt_app_content" class="app-content  flex-column-fluid ">
+<div id="kt_app_content_container" class="app-container  container-xxl ">
+  <div class="card card-flush">
+
+
+
+    <div class="card-body p-1">
+      <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderOperationShap" [loaderId]="searchLoader"></ngx-ui-loader>
+  <ng-container *ngFor="let module of permissions">
+        <ngb-accordion #acc11="ngbAccordion">
+          <ngb-panel   id="toggle-11">
+            <ng-template class="p-1 " ngbPanelTitle>
+              <span class="fs-3" translate>{{module.moduleAppNameAr}} </span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <div class="row ">
+                <ng-container *ngFor="let screen of module.screenClaims;let index=index">
+                  <div class="col-12 col-md-3  my-2  ">
+                    <div  [ngClass]="{'bg-light': index%2==0}" class="card  ">
+                      <div class="p-2 ">
+                        <h3 class="card-title p-2  fs-4  fw-bold m-0" translate>{{screen.screenAppNameAr}} </h3>
+                        <div class="card-tools">
+                        </div>
+                      </div>
+                      <div class="card-body" #containerRef style="display: block;">
+                        <ng-container *ngFor="let claim of screen.claims">
+                          <div class="row justify-content-between">
+                            <div class="col-10">
+                              <label for="{{claim.claimValue}}" class="form-label fs-4"
+                                translate>general.Permission.{{claim.key}}</label>
+                              </div>
+                            <div class="col-2 text-left">
+                              <input   [(ngModel)]="claim.isSelected" name="{{claim.claimValue}}" type="checkbox" type="checkbox"
+                                id="{{claim.claimValue}}" class="form-check-input text-left" type="checkbox"     >
+                            </div>
+
+                          </div>
+
+
+                        </ng-container>
+
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+
+            </ng-template>
+          </ngb-panel>
+
+        </ngb-accordion>
+
+
+      </ng-container>
+    </div>
+  </div>
+  </div>
+  </div>
+

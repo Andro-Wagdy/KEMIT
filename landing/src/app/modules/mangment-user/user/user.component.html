@@ -1,0 +1,270 @@
+<app-toolbar [total]="pagination!.totalItems" class="app-toolbar" [appToolbarLayout]="'reports'" id="kt_app_toolbar">
+  <ng-container #content>
+    <li class="nav-item">
+      <button *ngIf="(lengthSelect>=1)" (click)="openModalTitle(deleteModal)"
+        class="btn btn-sm fs-4 py-2   fw-bold btn-danger mx-3" translate> <i class="fa fa-trash"></i>
+        general.action.delete
+      </button>
+    </li>
+        <li class="nav-item">
+      <button *hasPermission="['permission.teamwork.register']"  (click)="register()" class=" btn btn-sm fs-4 py-2  fw-bold btn-success mx-2" translate>
+        <i class="fa fa-plus mx-1"></i> general.action.register
+      </button>
+    </li>
+  </ng-container>
+</app-toolbar>
+<div id="kt_app_content" class="app-content  flex-column-fluid ">
+  <div id="kt_app_content_container" class="app-container  container-xxl ">
+
+
+    <div class="card card-flush">
+      <div class="card-header align-items-center py-2 gap-2 gap-md-5">
+          <app-search-simple (searchChange)="searchChange($event)"></app-search-simple>
+          <table-length [lengthTable]="tableLengthSelect" (lengthChange)="ListItemChange($event)"></table-length>
+      </div>
+      <div class="card-body p-1">
+        <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderSearchShap" [loaderId]="searchLoader"></ngx-ui-loader>
+        <div class="table-responsive">
+          <p-table #tableMaster [value]="entities!" [rows]="pagination!.pageSize" dataKey="id" [lazy]="true"
+            (onLazyLoad)="tableChange($event)" (selectionChange)="onSelectionChange($event)"
+            [totalRecords]="pagination!.totalItems">
+            <ng-template pTemplate="header" let-columns>
+              <tr class=" ">
+                <th style="width:.5%">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th style="width:.5%" translate>#</th>
+
+                <th pSortableColumn="fullName" style="width:15%" translate="management.user.fullName">
+                  <i class="fas fa-sort"></i>
+                </th>
+
+                <th pSortableColumn="email" style="width:10%" translate="management.user.email"> <i
+                    class="fas fa-sort"></i>
+                </th>
+                <th pSortableColumn="userType" style="width:10%" translate="management.user.jobTitle"> <i
+                    class="fas fa-sort"></i>
+                </th>
+                <th pSortableColumn="userType" style="width:10%" translate="management.user.userType"> <i
+                  class="fas fa-sort"></i>
+              </th>
+                <th pSortableColumn="lastLogin" style="width:15%" translate="management.user.lastLogin"> <i
+                    class="fas fa-sort"></i>
+                </th>
+
+
+                <th pSortableColumn="lastEditDate" style="width:15%" translate="general.table.lastEditDate">
+                  <i class="fas fa-sort"></i>
+                </th>
+                <th style="width:15%" translate></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-entity let-index="rowIndex" let-columns="columns">
+              <tr class="fs-5">
+                <td>
+                  <p-tableCheckbox [value]="entity"></p-tableCheckbox>
+                </td>
+                <td>{{index+1}}</td>
+                <td>{{entity.name}}</td>
+                <td>{{entity.email}}</td>
+                <td>{{entity.jobTitle}}</td>
+                <td translate="management.user.{{entity.userType?.toLowerCase()}}"></td>
+
+                <td>{{entity.lastLogin | date:"HH:mm yyyy-MM-dd"}}</td>
+                <td>{{entity.lastEditDate | date:"HH:mm yyyy-MM-dd" }}</td>
+                <td>
+                  <span *hasPermission="['permission.teamwork.changepermision']"  (click)=" goPermissions(entity.clientId) "
+                  class="btn btn-icon mx-1 btn-bg-light btn-active-color-warning btn-sm me-1">
+                  <app-keenicon name="eye-slash" class="fs-2 text-primary mx-2 "></app-keenicon>
+
+                </span>
+
+                    <span class="card-toolbar">
+                    <button   type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
+                      data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
+                      <app-keenicon name="switch" class="fs-2 text-primary"></app-keenicon>
+                    </button>
+                  <dropdown-menu-action style="z-index: 105; position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-712px, 260.8px, 0px);">
+                      <ng-container #actions>
+                        <div class="menu-item ">
+
+                          <span *hasPermission="['permission.teamwork.edit']"  (click)=" EditModel(entity.clientId) " class="menu-link  "  >
+                              <app-keenicon name="user-edit" class="fs-2 text-info mx-2 "></app-keenicon>
+                              <span translate="general.action.edit"></span>
+                          </span>
+                             </div>
+                          <div *hasPermission="['permission.teamwork.delete']"  class="menu-item  " (click)="openModal(entity.id,deleteModal) ">
+                           <span  class="menu-link  " >
+                           <app-keenicon name="trash" class="fs-2 text-primary mx-2 "></app-keenicon>
+                           <span translate="general.action.delete"></span>
+                           </span>
+                          </div>
+                          <div  *hasPermission="['permission.teamwork.changepassword']"  class="menu-item " (click)="openModal(entity.id,templateChangePassword)">
+                          <span  class="menu-link  " >
+                            <app-keenicon name="user-tick" class="fs-2 text-warning  mx-2"></app-keenicon>
+                            <span translate="management.user.changePassword"></span>
+                            </span>
+                             </div>
+                        <div *hasPermission="['permission.teamwork.lock']"  class="menu-item ">
+                          <span (click)="onUserLock(entity.id) " class="menu-link"  >
+                              <app-keenicon name="lock" class="fs-2 text-primary mx-2 "></app-keenicon>
+                              <span translate="management.user.userLock"></span>
+                          </span>
+                        </div>
+                        <div  *hasPermission="['permission.teamwork.lock']" class="menu-item ">
+                          <span (click)="onUserUnLock(entity.id) " class="menu-link"  >
+                                <app-keenicon name="shield-tick" class="fs-2 text-success mx-2 "></app-keenicon>
+                                <span translate="management.user.UnuserLock"></span>
+
+                          </span>
+                        </div>
+                        <div *hasPermission="['permission.teamwork.loginas']" class="menu-item ">
+                          <span (click)="loginAs(entity.id)" class="menu-link"  >
+                              <app-keenicon name="profile-circle" class="fs-2 text-dark mx-2  "></app-keenicon>
+                              <span translate="management.user.loginAs"></span>
+
+                          </span>
+                        </div>
+                      </ng-container>
+                    </dropdown-menu-action>
+
+                  </span>
+
+
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div *ngIf="pagination!.totalItems<=0" class="text-center text-danger text-bold fs-3 p-3" translate>
+          general.message.noData</div>
+        <div *ngIf="pagination!.totalItems>0" class="row px-2 py-4 overflow-hidden">
+          <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+            <ngb-pagination-info [pagination]="pagination"></ngb-pagination-info>
+          </div>
+          <div class="col-sm-12 col-md-7 fs-3 d-flex align-items-center justify-content-center justify-content-md-end">
+            <ngb-pagination (pageChange)="pageChanged($event)" [pageSize]="pagination!.pageSize"
+              [collectionSize]="pagination!.totalItems" [(page)]="pagination!.pageNumber" [maxSize]="5" [rotate]="true"
+              [boundaryLinks]="true"></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #operation let-modal>
+  <form (ngSubmit)="OnSubmit()" #formEntity="ngForm">
+    <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderOperationShap"
+      [loaderId]="operationLoader"></ngx-ui-loader>
+    <div class="modal-header p-4  bg-dark">
+      <h4 class="modal-title text-white" id="modal-basic-title fs-4"><span translate>general.action.register
+        </span><span translate>{{titleOperation}} </span></h4>
+      <button type="button" class="bg-dark border-0" aria-label="Close" (click)="modal.dismiss()"> <i
+          class="fas  text-white fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <label for="displayName" class="required fs-4 fw-bold form-label mb-2"
+            translate>management.language.displayName</label>
+          <input InputTirmFilter name="displayName" pattern=".*[^ ].*" #displayName="ngModel"
+            [(ngModel)]="form.displayName" type="text" class=" form-control form-control-solid" id="nameEn" required>
+          <div *ngIf="displayName.invalid && displayName.touched" class="text-danger text-center" translate>
+            general.message.filedIdRequired</div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="name" class="required fs-4 fw-bold form-label mb-2" translate>management.language.name</label>
+          <input InputTirmFilter name="name" pattern=".*[^ ].*" #name="ngModel" [(ngModel)]="form.name" type="text"
+            class="form-control  form-control-solid " id="name" required>
+          <div *ngIf="name.invalid && name.touched" class="text-danger text-center" translate>
+            general.message.filedIdRequired</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <label for="icon" class="required fs-4 fw-bold form-label mb-2" translate>management.language.icon</label>
+          <input InputTirmFilter name="icon" pattern=".*[^ ].*" #icon="ngModel" [(ngModel)]="form.icon" type="text"
+            class="form-control  form-control-solid " id="icon" required>
+          <div *ngIf="icon.invalid && icon.touched" class="text-danger text-center" translate>
+            general.message.filedIdRequired</div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="direction" class="required fs-4 fw-bold form-label mb-2"
+            translate>management.language.direction</label>
+          <input InputTirmFilter name="direction" pattern=".*[^ ].*" #direction="ngModel" [(ngModel)]="form.icon"
+            type="text" class="form-control  form-control-solid " id="direction" required>
+          <div *ngIf="direction.invalid && direction.touched" class="text-danger text-center" translate>
+            general.message.filedIdRequired</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <label class=" fs-4 fw-bold form-label mb-2" translate>management.language.isActive</label>
+          <div class="form-check form-check-custom form-check-solid">
+            <input name="isActive" [(ngModel)]="form.isActive" #isActive="ngModel" id="isActive" type="checkbox"
+              class="form-check-input" type="checkbox">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer p-0 m-0 d-flex justify-content-between">
+      <button [ngClass]="{'btn-info': isEditForm,'btn-success':!isEditForm}" [disabled]="!formEntity.valid "
+        type="submit" class=" btn btn-md" aria-label="register">
+        <span translate>general.action.save</span>
+      </button>
+      <button type="button" class="btn btn-md btn-danger  " aria-label="Close" (click)="modal.dismiss()">
+        <span translate>general.action.close</span>
+      </button>
+    </div>
+  </form>
+</ng-template>
+<ng-template #deleteModal let-modal>
+  <app-delete-modal (deleteConfirm)="DeleteConfirm()" (dismiss)="modal.dismiss()"></app-delete-modal>
+</ng-template>
+
+<ng-template #templateChangePassword let-modal>
+
+  <form (ngSubmit)="confirmChangePassword()" #formEntity="ngForm">
+    <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderOperationShap"
+      [loaderId]="operationLoader"></ngx-ui-loader>
+    <div class="modal-header p-4  bg-dark">
+      <h4 class="modal-title text-white" id="modal-basic-title fs-4"><span translate>general.action.register
+        </span><span translate>{{titleOperation}} </span></h4>
+      <button type="button" class="bg-dark border-0" aria-label="Close" (click)="modal.dismiss()"> <i
+          class="fas  text-white fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <label for="password" class="required fs-4 fw-bold form-label mb-2" translate>management.user.password</label>
+          <input InputTirmFilter name="password" pattern=".*[^ ].*" #password="ngModel"
+            [(ngModel)]="formPassword.password" type="text" class=" form-control form-control-solid" id="password"
+            required>
+          <div *ngIf="password.invalid && password.touched" class="text-danger text-center" translate>
+            general.message.filedIdRequired</div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="repassword" class="required fs-4 fw-bold form-label mb-2"
+            translate>management.user.repassword</label>
+          <input InputTirmFilter (change)="repasswordChange()" name="repassword" pattern=".*[^ ].*"
+            #repassword="ngModel" [(ngModel)]="formPassword.repassword" type="text"
+            class="form-control  form-control-solid " id="name" required>
+          <div *ngIf="repassword.invalid && repassword.touched" class="text-danger text-center" translate>
+            general.message.filedIdRequired</div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="modal-footer p-0 m-0 d-flex justify-content-between">
+      <button [ngClass]="{'btn-info': isEditForm,'btn-success':!isEditForm}" [disabled]="!formEntity.valid "
+        type="submit" class=" btn btn-md" aria-label="register">
+        <span translate>general.action.save</span>
+      </button>
+      <button type="button" class="btn btn-md btn-danger  " aria-label="Close" (click)="modal.dismiss()">
+        <span translate>general.action.close</span>
+      </button>
+    </div>
+  </form>
+</ng-template>

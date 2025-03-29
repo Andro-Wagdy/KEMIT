@@ -1,0 +1,218 @@
+<app-toolbar [total]="pagination!.totalItems" class="app-toolbar" [appToolbarLayout]="'reports'" id="kt_app_toolbar">
+  <ng-container #content>
+    <li class="nav-item">
+      <button *ngIf="(lengthSelect>=1)" (click)="openModalTitle(deleteModal)"
+        class="btn btn-sm fs-4 py-2   fw-bold btn-danger mx-3" translate> <i class="fa fa-trash"></i>
+        general.action.delete
+      </button>
+    </li>
+
+    <li class="nav-item" *hasPermission="['permission.auditapp.register']">
+      <button (click)="openModalTitle(operation)" class=" btn btn-sm fs-4 py-2  fw-bold btn-success mx-2" translate>
+        <i class="fa fa-plus mx-1"></i> general.action.register
+      </button>
+    </li>
+  </ng-container>
+</app-toolbar>
+<div id="kt_app_content" class="app-content  flex-column-fluid ">
+  <div id="kt_app_content_container" class="app-container  container-xxl ">
+    <base-search class="search-wapper" [form]="form" (OnSearch)="OnSearch($event)" (OnReset)="OnReset($event)"
+      [showReportType]="false" [showSettingReport]="false" [showReportType]="false"  *hasPermission="['permission.auditapp.serachadvanced']">
+      <ng-container search>
+
+        <div class="row   col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label   " translate>management.auditApp.dateFrom</label>
+          <div class="col-8">
+            <input InputTirmFilter type="datetime-local" onkeydown="return false" class="form-control" name="dateFrom"
+              #dateFrom="ngModel" [(ngModel)]="pagination.dateFrom" class="form-control  form-control-sm  rounded-0 ">
+
+          </div>
+        </div>
+        <div class="row    col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label   " translate>management.auditApp.dateTo</label>
+          <div class="col-8">
+            <input InputTirmFilter type="datetime-local" onkeydown="return false" class="form-control" name="dateTo"
+              #dateTo="ngModel" [(ngModel)]="pagination.dateTo" class="form-control  form-control-sm  rounded-0 ">
+
+          </div>
+        </div>
+        <div class="row  col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label " translate> management.auditApp.userFullName</label>
+          <div class="col-12 col-md-8">
+            <textarea rows="1" InputTirmFilter name="userFullName" #targetValue="ngModel"
+              [(ngModel)]="pagination.userFullName" class="form-control form-control-sm" id="userFullName"></textarea>
+          </div>
+        </div>
+        <div class="row  col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label " translate> management.auditApp.tableName
+          </label>
+          <div class="col-12 col-md-8">
+            <div class="  bg-white ">
+              <ng-multiselect-dropdown [placeholder]="'general.message.select'|translate" [settings]="dropdownSettings"
+                [data]="tablesName" [(ngModel)]="tablesNameSelected" name="tablesNameSelected" required>
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="row  col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label " translate> management.auditApp.level
+          </label>
+          <div class="col-12 col-md-8">
+            <div class="  bg-white ">
+              <ng-multiselect-dropdown [placeholder]="'general.message.select'|translate" [settings]="dropdownSettings"
+                [data]="levels" [(ngModel)]="levelSelected" (onFilterChange)="onScreensChange($event)" name="screens"
+                required>
+              </ng-multiselect-dropdown>
+
+            </div>
+          </div>
+        </div>
+        <div class="row  col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label " translate> management.auditApp.state
+          </label>
+          <div class="col-12 col-md-8">
+            <div class="  bg-white ">
+              <ng-multiselect-dropdown [placeholder]="'general.message.select'|translate" [settings]="dropdownSettings"
+                [data]="status" [(ngModel)]="statesSelected" (onFilterChange)="onScreensChange($event)" name="screens"
+                required>
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <div class="row  col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label " translate> management.auditApp.rowClientId</label>
+          <div class="col-12 col-md-8">
+            <textarea rows="1" InputTirmFilter name="rowClientId" #targetValue="ngModel"
+              [(ngModel)]="pagination.rowClientId" class="form-control form-control-sm" id="rowClientId"></textarea>
+          </div>
+        </div>
+        <div class="row  col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label " translate> management.auditApp.statusCode</label>
+          <div class="col-12 col-md-8">
+            <input type="number" name="statusCode" #targetValue="ngModel" [(ngModel)]="pagination.statusCode"
+              class="form-control form-control-sm" id="statusCode" />
+          </div>
+        </div>
+        <div class="row  col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label " translate> management.auditApp.isShowUser</label>
+
+
+          <div class="col-12 col-md-8">
+            <div class="form-check form-check-custom ">
+              <input name="isShowUser" [(ngModel)]="pagination.isShowUser" #isShowUser="ngModel" id="isShowUser"
+                type="checkbox" class="form-check-input" type="checkbox">
+            </div>
+
+
+          </div>
+        </div>
+        <div class="row  col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label " translate> management.auditApp.isLogin</label>
+          <div class="col-12 col-md-8">
+            <div class="form-check form-check-custom ">
+              <input name="isLogin" [(ngModel)]="pagination.isLogin" #isLogin="ngModel" id="isLogin" type="checkbox"
+                class="form-check-input" type="checkbox">
+            </div>
+
+          </div>
+        </div>
+        <div class="row  col-12 col-md-4 align-items-center">
+          <label class="col-12 col-md-4 col-form-label " translate> management.auditApp.isLogout</label>
+          <div class="col-12 col-md-8">
+            <div class="form-check form-check-custom  ">
+              <input name="isLogout" [(ngModel)]="pagination.isLogout" #isLogout="ngModel" id="isLogout" type="checkbox"
+                class="form-check-input" type="checkbox">
+            </div>
+
+          </div>
+        </div>
+
+
+      </ng-container>
+
+
+    </base-search>
+    <div class="card card-flush">
+      <div class="card-header align-items-center py-2 gap-2 gap-md-5">
+        <app-search-simple (searchChange)="searchChange($event)"  *hasPermission="['permission.auditapp.search']"></app-search-simple>
+        <table-length [lengthTable]="tableLengthSelect" (lengthChange)="ListItemChange($event)"></table-length>
+      </div>
+      <div class="card-body p-1">
+        <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderSearchShap" [loaderId]="searchLoader"></ngx-ui-loader>
+        <div class="table-responsive">
+          <p-table #tableMaster [value]="entities!" [rows]="pagination!.pageSize" dataKey="id" [lazy]="true"
+            (onLazyLoad)="tableChange($event)" (selectionChange)="onSelectionChange($event)"
+            [totalRecords]="pagination!.totalItems">
+            <ng-template pTemplate="header" let-columns>
+              <tr class=" ">
+                <th style="width:.5%">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th style="width:.5%" translate>#</th>
+                <th pSortableColumn="tableName" style="width:15%" translate="management.auditApp.tableName">
+                  <i class="fas fa-sort"></i>
+                </th>
+                <th pSortableColumn="state" style="width:15%" translate="management.auditApp.state">
+                  <i class="fas fa-sort"></i>
+                </th>
+                <th pSortableColumn="level" style="width:15%" translate="management.auditApp.level"> <i
+                    class="fas fa-sort"></i>
+                </th>
+                <th pSortableColumn="userFullName" style="width:15%" translate="management.auditApp.userFullName"> <i
+                    class="fas fa-sort"></i>
+                </th>
+                <th pSortableColumn="timeStamp" style="width:15%" translate="management.auditApp.timeStamp"> <i
+                    class="fas fa-sort"></i>
+                </th>
+
+                <th style="width:15%" translate></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-entity let-index="rowIndex" let-columns="columns">
+              <tr class="fs-5">
+                <td>
+                  <p-tableCheckbox [value]="entity"></p-tableCheckbox>
+                </td>
+                <td>{{index+1}}</td>
+                <td>{{ getScreen (entity.tableName)}}</td>
+                <td [innerHTML]="getStatus (entity.state)"></td>
+                <td [innerHTML]="getLevel(entity.level)"></td>
+                <td>{{entity.userFullName}}</td>
+                <td>{{entity.timeStamp | date:"HH:mm yyyy-MM-dd" }}</td>
+                <td>
+                  <span (click)=" EditModel(entity.id,operation,'lg') "  *hasPermission="['permission.auditapp.view']"
+                    class="btn btn-icon mx-1 btn-bg-light btn-active-color-primary btn-sm me-1">
+                    <app-keenicon name="eye" class="fs-2 text-primary mx-2 "></app-keenicon>
+
+                  </span>
+
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div *ngIf="pagination!.totalItems<=0" class="text-center text-danger text-bold fs-3 p-3" translate>
+          general.message.noData</div>
+        <div *ngIf="pagination!.totalItems>0" class="row px-2 py-4 overflow-hidden">
+          <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
+            <ngb-pagination-info [pagination]="pagination"></ngb-pagination-info>
+          </div>
+          <div class="col-sm-12 col-md-7 fs-3 d-flex align-items-center justify-content-center justify-content-md-end">
+            <ngb-pagination (pageChange)="pageChanged($event)" [pageSize]="pagination!.pageSize"
+              [collectionSize]="pagination!.totalItems" [(page)]="pagination!.pageNumber" [maxSize]="5" [rotate]="true"
+              [boundaryLinks]="true"></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #operation let-modal>
+  <audit-app-view [form]="form" [changeEntity]="changeEntity" [title]="title"></audit-app-view>
+
+
+</ng-template>
+<ng-template #deleteModal let-modal>
+  <app-delete-modal (deleteConfirm)="DeleteConfirm()" (dismiss)="modal.dismiss()"></app-delete-modal>
+</ng-template>

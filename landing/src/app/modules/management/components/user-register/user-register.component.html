@@ -1,0 +1,215 @@
+<app-toolbar class="app-toolbar" [appToolbarLayout]="'reports'" id="kt_app_toolbar">
+  <ng-container #content>
+    <li class="nav-item"  >
+      <button  (click)="back()" class=" btn btn-sm fs-4 py-2  fw-bold btn-primary mx-2" translate>
+        <i class="fa fa-search mx-1"></i> general.action.search
+      </button>
+    </li>
+
+    <li class="nav-item"  *ngIf="isEditForm">
+      <button [disabled]="!form.valid" (click)="edit()"  class=" btn btn-sm fs-4 py-2  fw-bold btn-info mx-2" translate>
+        <i class="fa fa-edit mx-1"></i> general.action.edit
+      </button>
+    </li>
+    <li class="nav-item" *ngIf="!isEditForm">
+      <button [disabled]="!form.valid" (click)="register()" class=" btn btn-sm fs-4 py-2  fw-bold btn-success mx-2" translate>
+        <i class="fa fa-plus mx-1"></i> general.action.save
+      </button>
+    </li>
+  </ng-container>
+</app-toolbar>
+<div id="kt_app_content" class="app-content  flex-column-fluid ">
+  <div id="kt_app_content_container" class="app-container  container-xxl ">
+    <div class="card card-flush">
+      <ngx-ui-loader [hasProgressBar]="false"    [fgsType]="loaderOperationShap" [loaderId]="operationLoader"></ngx-ui-loader>
+
+      <div class="card">
+           <ngx-ui-loader [hasProgressBar]="false" [fgsType]="loaderOperationShap"
+            [loaderId]="operationLoader"></ngx-ui-loader>
+            <form [formGroup]="form">
+          <div class="card-toolbar p-3">
+            <ul class="nav ">
+              <li class="nav-item">
+                <a class="
+                    nav-link
+                    btn btn-sm btn-color-muted btn-active btn-active-light-primary
+                    fw-bolder
+                    fs-3
+                    px-4
+                    me-1
+                  " data-bs-toggle="tab" [ngClass]="activeClass('userData')" (click)="setTab('userData')"
+                  translate="management.user.userData">
+                </a>
+              </li>
+
+
+
+
+            </ul>
+          </div>
+
+          <div class="tab-content card-body ">
+            <div class="tab-pane fade" [ngClass]="activeClass('userData')" id="userData">
+
+                <div class="row text-center p-5">
+                  <div class="  col-12 col-md-6">
+                    <div class="form-group row">
+                      <label class="col-12 col-sm-4   required col-form-label  fw-bold fs-5   " translate>management.user.fullName</label>
+                      <div class="col-12 col-sm-8">
+                        <input spaceValidator formControlName="name" name="name" InputTirmFilter type="text"
+                          class="form-control my-2   fs-5     rounded-0">
+                        <div class="text-center" *ngIf="name?.touched && name?.invalid">
+                          <div *ngIf="name?.hasError('required')" class="text-danger" translate>
+                            general.message.filedIdRequired
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group  row ">
+                      <label class="col-sm-4 required col-form-label  fw-bold fs-5" translate>management.user.userName</label>
+                      <div class="col-sm-8">
+                        <input spaceValidator formControlName="userName" name="userName" InputTirmFilter type="text"
+                        class="form-control my-2   fs-5    rounded-0">
+                      <div class="text-center" *ngIf="userName?.touched && userName?.invalid">
+                        <div *ngIf="userName?.hasError('required')" class="text-danger" translate>
+                          general.message.filedIdRequired
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="form-group  row ">
+                      <label class="col-sm-4 required col-form-label  fw-bold fs-5" translate>management.user.email</label>
+                      <div class="col-sm-8">
+                        <input spaceValidator formControlName="email" name="email" InputTirmFilter type="text"
+                        class="form-control my-2   fs-5    rounded-0">
+                      <div class="text-center" *ngIf="email?.touched && email?.invalid">
+                        <div *ngIf="email?.hasError('required')" class="text-danger" translate>
+                          general.message.filedIdRequired
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+
+
+                    <div *ngIf="!isEditForm" class="form-group row">
+                      <label class="col-sm-4  required col-form-label  fw-bold fs-5" translate>management.user.password</label>
+                      <div class="col-sm-8">
+                        <input spaceValidator formControlName="password" name="password" InputTirmFilter type="password"
+                          class="form-control my-2   fs-5    rounded-0">
+                        <div class="text-center" *ngIf="password?.touched && password?.invalid">
+                          <div class="text-danger" *ngIf="password?.hasError('required')" translate>
+                            general.message.filedIdRequired
+                          </div>
+                          <div class="text-danger" *ngIf="password?.touched && password?.hasError('minlength')" translate>
+                            management.user.passwordMustHasMin4Character </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="!isEditForm" class="form-group row">
+                      <label class="col-sm-4 required col-form-label  fw-bold fs-5" translate>management.user.repassword</label>
+                      <div class="col-sm-8">
+                        <input spaceValidator formControlName="repassword" name="repassword" InputTirmFilter type="password"
+                          class="form-control my-2   fs-5    rounded-0">
+                        <div class="text-center text-danger" *ngIf="repassword?.touched && repassword?.invalid">
+                          <div *ngIf="repassword?.hasError('required')" translate>general.message.filedIdRequired
+                          </div>
+                          <div *ngIf="repassword?.hasError('mustMatch')" translate>
+                            management.user.thePasswordAndRepasswordNotMatch</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+
+                    <div class="form-group row ">
+                      <label class="col-sm-4    col-form-label  fw-bold fs-5" translate>management.user.jobTitle</label>
+                      <div class="col-sm-8">
+                        <input spaceValidator formControlName="jobTitle" name="jobTitle" InputTirmFilter type="text"
+                          class="form-control my-2   fs-5    rounded-0">
+                        <div class="text-center" *ngIf="jobTitle?.touched && jobTitle?.invalid">
+                          <div *ngIf="jobTitle?.hasError('required')" class="text-danger" translate>
+                            general.message.filedIdRequired
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row  ">
+                      <label class="col-sm-4 col-form-label  fw-bold fs-5" translate> management.user.phoneNumber</label>
+                      <div class="col-sm-8">
+                        <input formControlName="phoneNumber" name="phoneNumber" InputTirmFilter type="text"
+                          class="form-control my-2   fs-5    rounded-0">
+                        <div class="text-center" *ngIf="phoneNumber?.touched && phoneNumber?.invalid">
+                          <div *ngIf="phoneNumber?.hasError('required')" class="text-danger" translate>
+                            general.message.filedIdRequired
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row  ">
+                     <label class="col-sm-4 col-form-label  fw-bold fs-5 required " translate> management.user.roles
+                      </label>
+                       <div class="col-12 col-md-8">
+                        <select formControlName="roleName" name="roleName"  class="form-select fs-3 form-select-solid form-select-lg my-2">
+                        <ng-container *ngFor="let entity of roles ">
+                          <option value="{{entity.name}}">{{ entity.name}}</option>
+                       </ng-container>
+                      </select>
+
+                      <div class="text-center" *ngIf="roleName?.touched && roleName?.invalid">
+                        <div *ngIf="roleName?.hasError('required')" class="text-danger" translate>
+                          general.message.filedIdRequired
+                        </div>
+                      </div>
+
+                      </div>
+                    </div>
+                    <div class="form-group row  ">
+                      <label class="col-sm-4 col-form-label  fw-bold fs-5 required " translate> management.user.userType
+                       </label>
+                        <div class="col-12 col-md-8">
+                         <select formControlName="userType" name="userType"  class="form-select fs-3  form-select-solid form-select-lg my-2">
+                          <option   value=10 translate>management.user.system</option>
+                          <option   value=20 translate>management.user.admin</option>
+                          <option   value=30 translate>management.user.user</option>
+                          <option   value=100 translate>management.user.other</option>
+                        </select>
+                       <div class="text-center" *ngIf="userType?.touched && userType?.invalid">
+                         <div *ngIf="userType?.hasError('required')" class="text-danger" translate>
+                           general.message.filedIdRequired
+                         </div>
+                       </div>
+
+                       </div>
+                     </div>
+                  </div>
+                </div>
+
+
+
+            </div>
+            <div class="tab-pane fade" [ngClass]="activeClass('userSetting')" id="userSetting">
+
+              <div class="row text-center p-5">
+                <div class="  col-12 col-md-6">
+
+
+                   </div>
+                  </div>
+
+              </div>
+              </div>
+
+
+
+
+
+        </form>
+
+       </div>
+
+
+
+      </div>
+      </div>
+    </div>

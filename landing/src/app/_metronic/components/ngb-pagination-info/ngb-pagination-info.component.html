@@ -1,0 +1,11 @@
+  <span class="fs-4" translate="general.table.pDisplay"></span>
+  <span   class="d-inline-block mx-1 fs-4">{{(((pagination!.pageNumber * pagination!.pageSize) -
+    pagination!.pageSize) + 1)}}</span>
+  <span class="fs-4" translate="general.table.pTo"></span>
+  <span  class="d-inline-block mx-1 fs-4">{{((pagination!.totalItems) > (pagination!.pageNumber *
+    pagination!.pageSize)) ? (pagination!.pageNumber * pagination!.pageSize) :
+    (pagination!.totalItems)}}</span>
+  <span class="fs-4" translate="general.table.pFrom"></span>
+  <span class="d-inline-block mx-1 fs-4">{{pagination!.totalItems}}</span>
+  <span class="fs-4" translate="general.table.pRecord"></span>
+
